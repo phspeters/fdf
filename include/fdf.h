@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/23 18:29:45 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:35:29 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ typedef struct s_master
 	mlx_image_t		*image;
 	unsigned int	map_height;
 	unsigned int	map_width;
-	t_pixel			*pixels;
+	t_pixel			**pixels;
 }					t_master;
 
 int					parse_args_and_map(int argc, char **argv, t_master *master);
 unsigned int		get_width(char *line);
+t_pixel				**read_map(char *filename, int width, int height);
 
 #endif

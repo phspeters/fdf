@@ -6,11 +6,13 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/23 19:09:17 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:59:41 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+// tratar os errors com errno e tals
 
 static unsigned int	get_height_and_check_width(int fd, unsigned int map_width)
 {
@@ -49,11 +51,15 @@ unsigned int	get_width(char *line)
 	if (line)
 	{
 		splitted_line = ft_split(line, ' ');
-		while (splitted_line[width] && *splitted_line[width] != '\n')
+		while (splitted_line[width])
 			width++;
-		while (splitted_line[i])
-			free(splitted_line[i++]);
-		free(splitted_line);
+		if (!ft_isprint(*splitted_line[width - 1]))
+		{
+			ft_free_ptr_array((void **)splitted_line, width);
+			--width;
+		}
+		else
+			ft_free_ptr_array((void **)splitted_line, width);
 	}
 	return (width);
 }

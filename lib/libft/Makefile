@@ -6,7 +6,7 @@
 #    By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 16:51:34 by pehenri2          #+#    #+#              #
-#    Updated: 2023/10/23 14:07:47 by pehenri2         ###   ########.fr        #
+#    Updated: 2023/10/24 15:06:33 by pehenri2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,14 @@ FILES = ft_isalpha.c			ft_isdigit.c			ft_isalnum.c			ft_isascii.c			ft_isprint.c
 		ft_lstdelone.c			ft_lstclear.c			ft_lstiter.c			ft_lstmap.c									\
 																															\
 		ft_isspace.c    		ft_putnbr_base_fd.c		ft_count_words.c		ft_nbrlen.c				ft_putptr_fd.c		\
+		ft_free_ptr_array.c																									\
 																															\
 		ft_get_next_line.c		ft_printf.c
 OBJ = $(FILES:.c=.o)
 CC = cc
 FLAGS = -Wall -Werror -Wextra
+
+all: $(NAME)
 
 $(NAME): $(OBJ)
 
@@ -42,7 +45,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-all: $(NAME)
 
 .PHONY: clean fclean re all norm

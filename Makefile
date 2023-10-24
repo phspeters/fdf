@@ -1,3 +1,4 @@
+#colocar nome dos arquivos nomeados
 NAME	:= fdf
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 LIBMLX	:= ./lib/MLX42
@@ -25,11 +26,11 @@ $(NAME): $(OBJS)
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(LIBMLX)/build
-	@rm -rf $(LIBFT)/*.o
-	@rm -rf $(LIBFT)/*.a
+	@make -C $(LIBFT) clean
 
 fclean: clean
 	@rm -rf $(NAME)
+	@make -C $(LIBFT) fclean
 
 re: clean all
 
