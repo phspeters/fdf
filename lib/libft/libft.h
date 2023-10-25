@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:02:33 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 20:59:55 by peters           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:49:32 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ size_t	ft_nbrlen(long n, int base);
 int		ft_putptr_fd(unsigned long nbr, int fd);
 void	*ft_free_ptr_array(void **ptr_array, size_t size);
 void	*ft_free_str_array(char **str_array);
+int		ft_issign(char c);
+int		ft_atoi_base(char *str, char *base);
 
 //Mandatory part 1 functions
 int		ft_isalpha(int c);
@@ -83,7 +85,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //get_next_line
 char	*ft_get_next_line(int fd);
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 15
+#  define BUFFER_SIZE 42
 # endif
 
 //ft_printf

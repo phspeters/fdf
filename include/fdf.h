@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 21:17:05 by peters           ###   ########.fr       */
+/*   Updated: 2023/10/25 18:37:38 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# define WIDTH 512
-# define HEIGHT 512
+# include <math.h>
+# define WIDTH 1080
+# define HEIGHT 1920
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
@@ -44,5 +45,6 @@ typedef struct s_master
 
 int					parse_args_and_map(int argc, char **argv, t_master *master);
 t_pixel				**read_map(char *filename, int width, int height);
-
+void				draw_map(t_master *master, int height, int width);
+void				draw_line_bresenham(int x, int y, int x2, int y2, t_master *master);
 #endif

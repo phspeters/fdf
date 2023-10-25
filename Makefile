@@ -1,6 +1,6 @@
 #colocar nome dos arquivos nomeados
 NAME	:= fdf
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g3
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
 
@@ -34,4 +34,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all, clean, fclean, re, libmlx
+.PHONY: all, clean, fclean, re, libmlx,

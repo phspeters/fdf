@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 21:26:13 by peters           ###   ########.fr       */
+/*   Updated: 2023/10/25 18:09:31 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ static char	**get_line_of_coordinates(int fd)
 
 static uint32_t	get_color(char *coordinate)
 {
-	char	*comma_address;
+	char	*x_address;
 
-	comma_address = ft_strchr(coordinate, ',');
-	if (comma_address)
-		return (0);
+	x_address = ft_strchr(coordinate, 'x');
+	if (x_address)
+		return (ft_atoi_base(x_address + 1, "0123456789ABCDEF"));
 	return (-1);
 }
-// return (ft_atol_base(++comma_address));
 
-void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
+static void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 {
 	pixel->x_axis = w;
 	pixel->y_axis = h;
@@ -51,6 +50,8 @@ t_pixel	**read_map(char *filename, int width, int height)
 	char	**splitted_line;
 
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
 	pixels = malloc(height * sizeof(t_pixel *));
 	splitted_line = NULL;
 	h = -1;

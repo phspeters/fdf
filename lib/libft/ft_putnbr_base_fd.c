@@ -6,34 +6,34 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 15:26:36 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/12 17:05:08 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:01:26 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_base(char *base)
+static int	check_base_and_get_length(char *base)
 {
+	int	base_len;
 	int	i;
-	int	j;
 
-	if (ft_strlen(base) == 0 || ft_strlen(base) == 1)
-		return (1);
-	i = 0;
-	while (base[i] != '\0')
+	base_len = 0;
+	while (base[base_len] != '\0')
 	{
-		if (base[i] == '+' || base[i] == '-')
-			return (1);
-		j = i + 1;
-		while (base[j] != '\0')
+		if (base[base_len] == '+' || base[base_len] == '-')
+			return (0);
+		i = base_len + 1;
+		while (base[i] != '\0')
 		{
-			if (base[i] == base[j])
-				return (1);
-			j++;
+			if (base[base_len] == base[i])
+				return (0);
+			i++;
 		}
-		i++;
+		base_len++;
 	}
-	return (0);
+	if (base_len < 2)
+		return (0);
+	return (base_len);
 }
 
 int	ft_putnbr_base_fd(long nb, char *base, int fd)
@@ -42,8 +42,8 @@ int	ft_putnbr_base_fd(long nb, char *base, int fd)
 	long	baselen;
 
 	counter = 0;
-	baselen = ft_strlen(base);
-	if (check_base(base))
+	baselen = check_base_and_get_length(base);
+	if (baselen == 0)
 		return (0);
 	if (nb < 0)
 	{

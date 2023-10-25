@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 21:27:23 by peters           ###   ########.fr       */
+/*   Updated: 2023/10/25 18:49:40 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,23 @@ int	main(int argc, char **argv)
 	if (parse_args_and_map(argc, argv, &master))
 		return (EXIT_FAILURE);
 	master.pixels = read_map(argv[1], master.map_width, master.map_height);
-	ft_printf("Height: %u\n", master.map_height);
-	ft_printf("Width: %u\n", master.map_width);
-	print_matrix(master);
+	if (!master.pixels)
+		return (EXIT_FAILURE);
+	//ft_printf("Height: %u\n", master.map_height);
+	//ft_printf("Width: %u\n", master.map_width);
+	//print_matrix(master);
+	mlx_set_setting(MLX_MAXIMIZED, true);
+	master.window = mlx_init(WIDTH, HEIGHT, "pehenri2 - fdf", true);
+	if (!master.window)
+		return (EXIT_FAILURE);
+	master.image = mlx_new_image(master.window, WIDTH, HEIGHT);
+	if (!master.image || (mlx_image_to_window(master.window, master.image, 0,
+				0) < 0))
+		return (EXIT_FAILURE);
+	draw_map(&master, master.map_height, master.map_width);
+	//draw_line_bresenham(100, 100, 100, 100, &master);
+	mlx_loop(master.window);
+	mlx_terminate(master.window);
 	ft_free_ptr_array((void **)master.pixels, master.map_height);
 	return (EXIT_SUCCESS);
 }
