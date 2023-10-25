@@ -6,7 +6,7 @@
 /*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 20:45:24 by peters           ###   ########.fr       */
+/*   Updated: 2023/10/24 21:17:05 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_pixel
 {
 	uint32_t		x_axis;
 	uint32_t		y_axis;
-	int				z_axis;
+	int32_t			z_axis;
 	uint32_t		rgba_channel;
 }					t_pixel;
 
@@ -43,7 +43,6 @@ typedef struct s_master
 }					t_master;
 
 int					parse_args_and_map(int argc, char **argv, t_master *master);
-unsigned int		get_width(char *line);
 t_pixel				**read_map(char *filename, int width, int height);
 
 #endif

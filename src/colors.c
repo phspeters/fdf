@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 13:51:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/18 14:14:52 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:28:12 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,3 @@ int	get_a(int rgba)
 {
 	return (rgba & 0xFF);
 }
-
-/*************************** EXAMPLE ******************************
-int32_t	main(void)
-{
-	// Init mlx with a canvas size of 256x256 and the ability to resize the window.
-	mlx_t* mlx = mlx_init(256, 256, "MLX42", true);
-	if (!mlx) exit(EXIT_FAILURE);
-	// Create a 128x128 image.
-	mlx_image_t* img = mlx_new_image(mlx, 128, 128);
-	// Set the channels of each pixel in our image to the maximum byte value of 255.
-	memset(img->pixels, 255, img->width * img->height * BPP);
-	// Draw the image at coordinate (0, 0).
-	mlx_image_to_window(mlx, img, 0, 0);
-	// Run the main loop and terminate on quit.
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}
-*/
