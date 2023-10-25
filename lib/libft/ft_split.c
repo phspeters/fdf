@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:39:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 12:19:03 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:23:28 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ft_split(char const *s, char c)
 			s++;
 		split[array_index] = malloc(sizeof(char) * (wordlen(s, c) + 1));
 		if (split[array_index] == NULL)
-			return (ft_free_ptr_array(split));
+			return (ft_free_ptr_array((void **)split, word_count + 1));
 		len = 0;
 		while ((*s != c) && (*s != '\0'))
 			split[array_index][len++] = *s++;

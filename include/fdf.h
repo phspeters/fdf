@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 14:35:29 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:45:24 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_pixel
 {
 	uint32_t		x_axis;
 	uint32_t		y_axis;
-	int32_t			z_axis;
+	int				z_axis;
 	uint32_t		rgba_channel;
 }					t_pixel;
 

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_ptr_array.c                                :+:      :+:    :+:   */
+/*   ft_free_str_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:17:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 20:59:01 by peters           ###   ########.fr       */
+/*   Updated: 2023/10/24 20:59:29 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_free_ptr_array(void **ptr_array, size_t size)
+void	*ft_free_str_array(char **str_array)
 {
-	size_t	i;
+	int	i;
 
-	if (ptr_array == NULL)
+	if (str_array == NULL)
 		return (NULL);
 	i = 0;
-	while (i < size)
-		free(ptr_array[i++]);
-	free(ptr_array);
+	while (str_array[i] != NULL)
+		free(str_array[i++]);
+	free(str_array);
 	return (NULL);
 }

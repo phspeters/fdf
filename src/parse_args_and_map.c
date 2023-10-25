@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_and_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 15:59:41 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:25:33 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ unsigned int	get_width(char *line)
 {
 	unsigned int	width;
 	char			**splitted_line;
-	int				i;
 
 	width = 0;
-	i = 0;
 	if (line)
 	{
 		splitted_line = ft_split(line, ' ');

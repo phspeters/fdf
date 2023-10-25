@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 16:00:16 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:01:27 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ uint32_t	get_color(char *coordinate)
 	comma_address = ft_strchr(coordinate, ',');
 	if (comma_address)
 		return (0);
-		//return (ft_atol_base(++comma_address));
 	return (-1);
 }
+		//return (ft_atol_base(++comma_address));
 
 t_pixel	**read_map(char *filename, int width, int height)
 {
@@ -44,11 +44,12 @@ t_pixel	**read_map(char *filename, int width, int height)
 
 	fd = open(filename, O_RDONLY);
 	pixels = malloc(height * sizeof(t_pixel *));
+	splitted_line = NULL;
 	h = 0;
 	while (h < height)
 	{
 		pixels[h] = malloc(width * sizeof(t_pixel));
-		ft_free_ptr_array((void **)splitted_line, width);
+		ft_free_str_array(splitted_line);
 		splitted_line = get_line_of_coordinates(fd);
 		w = 0;
 		while (w < width)
@@ -61,7 +62,7 @@ t_pixel	**read_map(char *filename, int width, int height)
 		}
 		h++;
 	}
-	ft_free_ptr_array((void **)splitted_line, height);
+	ft_free_str_array(splitted_line);
 	close(fd);
 	return (pixels);
 }

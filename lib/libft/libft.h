@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: peters <peters@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:02:33 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/24 15:22:30 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:59:55 by peters           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		ft_putnbr_base_fd(long nbr, char *base, int fd);
 int		ft_count_words(const char *string, const char delimiter);
 size_t	ft_nbrlen(long n, int base);
 int		ft_putptr_fd(unsigned long nbr, int fd);
-void	*ft_free_ptr_array(void **split, size_t size);
+void	*ft_free_ptr_array(void **ptr_array, size_t size);
+void	*ft_free_str_array(char **str_array);
 
 //Mandatory part 1 functions
 int		ft_isalpha(int c);
