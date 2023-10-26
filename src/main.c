@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/25 18:49:40 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:10:22 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,6 @@
 //***** Remember to initiate structs
 #include <stdio.h>
 
-void	print_matrix(t_master master)
-{
-	unsigned int	i;
-	unsigned int	j;
-
-	i = 0;
-	while (i < master.map_height)
-	{
-		j = 0;
-		while (j < master.map_width)
-		{
-			printf("%5d", master.pixels[i][j].z_axis);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_master	master;
@@ -53,9 +34,6 @@ int	main(int argc, char **argv)
 	master.pixels = read_map(argv[1], master.map_width, master.map_height);
 	if (!master.pixels)
 		return (EXIT_FAILURE);
-	//ft_printf("Height: %u\n", master.map_height);
-	//ft_printf("Width: %u\n", master.map_width);
-	//print_matrix(master);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	master.window = mlx_init(WIDTH, HEIGHT, "pehenri2 - fdf", true);
 	if (!master.window)
@@ -64,8 +42,8 @@ int	main(int argc, char **argv)
 	if (!master.image || (mlx_image_to_window(master.window, master.image, 0,
 				0) < 0))
 		return (EXIT_FAILURE);
+	master.zoom = 1;
 	draw_map(&master, master.map_height, master.map_width);
-	//draw_line_bresenham(100, 100, 100, 100, &master);
 	mlx_loop(master.window);
 	mlx_terminate(master.window);
 	ft_free_ptr_array((void **)master.pixels, master.map_height);

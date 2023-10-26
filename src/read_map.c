@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/25 18:09:31 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:45:46 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static uint32_t	get_color(char *coordinate)
 
 	x_address = ft_strchr(coordinate, 'x');
 	if (x_address)
-		return (ft_atoi_base(x_address + 1, "0123456789ABCDEF"));
+		return ((ft_atoi_base(x_address + 1, "0123456789ABCDEF") << 8) | 0xFF);
 	return (-1);
 }
 
