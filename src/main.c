@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/26 16:10:22 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:31:56 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// MLX allows you to define its core behaviour before startup.
-
-/* Do stuff */
-
-// Create and display the image.
-// Even after the image is being displayed, we can still modify the buffer.
-// Register a hook and pass mlx as an optional param.
-
-// NOTE: Do this before calling mlx_loop!
-
-//***** Remember to initiate structs
 #include <stdio.h>
 
 int	main(int argc, char **argv)
@@ -34,7 +23,6 @@ int	main(int argc, char **argv)
 	master.pixels = read_map(argv[1], master.map_width, master.map_height);
 	if (!master.pixels)
 		return (EXIT_FAILURE);
-	mlx_set_setting(MLX_MAXIMIZED, true);
 	master.window = mlx_init(WIDTH, HEIGHT, "pehenri2 - fdf", true);
 	if (!master.window)
 		return (EXIT_FAILURE);
@@ -42,8 +30,9 @@ int	main(int argc, char **argv)
 	if (!master.image || (mlx_image_to_window(master.window, master.image, 0,
 				0) < 0))
 		return (EXIT_FAILURE);
-	master.zoom = 1;
+	master.zoom = 2;
 	draw_map(&master, master.map_height, master.map_width);
+	mlx_loop_hook(master.window, generic_key_hook, &master);
 	mlx_loop(master.window);
 	mlx_terminate(master.window);
 	ft_free_ptr_array((void **)master.pixels, master.map_height);

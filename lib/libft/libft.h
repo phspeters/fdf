@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:02:33 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/25 14:49:32 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:03:38 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	*ft_free_ptr_array(void **ptr_array, size_t size);
 void	*ft_free_str_array(char **str_array);
 int		ft_issign(char c);
 int		ft_atoi_base(char *str, char *base);
+char	*ft_strtoupper(char *str);
+char	*ft_strtolower(char *str);
 
 //Mandatory part 1 functions
 int		ft_isalpha(int c);

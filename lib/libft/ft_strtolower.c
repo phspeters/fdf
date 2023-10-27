@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_str_array.c                                :+:      :+:    :+:   */
+/*   ft_strtolower.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 12:17:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/27 16:03:46 by pehenri2         ###   ########.fr       */
+/*   Created: 2023/10/27 15:39:32 by pehenri2          #+#    #+#             */
+/*   Updated: 2023/10/27 16:03:27 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_free_str_array(char **str_array)
+char	*ft_strtolower(char *str)
 {
 	int	i;
 
-	if (str_array == NULL)
-		return (NULL);
 	i = 0;
-	while (str_array[i] != NULL)
-		free(str_array[i++]);
-	free(str_array);
-	return (NULL);
+	while (str[i])
+	{
+		str[i] = ft_tolower(str[i]);
+		i++;
+	}
+	return (str);
 }

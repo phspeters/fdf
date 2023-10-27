@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/26 15:01:21 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:23:40 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# define WIDTH 1080
-# define HEIGHT 1920
+# define WIDTH 1920
+# define HEIGHT 1080
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
@@ -60,4 +60,6 @@ t_pixel				**read_map(char *filename, int width, int height);
 void				draw_map(t_master *master, int height, int width);
 void				draw_line_bresenham(t_pixel pixel, char flag,
 						t_master *master);
+void				generic_key_hook(void *param);
+
 #endif
