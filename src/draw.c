@@ -6,27 +6,37 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/26 16:08:57 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:53:14 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	put_valid_pixel(mlx_image_t *img, uint32_t x, uint32_t y,
+		uint32_t color)
+{
+	if (x > WIDTH)
+		x = WIDTH;
+	if (y > HEIGHT)
+		y = HEIGHT;
+	mlx_put_pixel(img, x, y, color);
+}
+
 t_line_info	set_bresenham_info(t_pixel pixel, char flag, t_master master)
 {
 	t_line_info	line_info;
 
-	line_info.x1 = pixel.x_axis * master.zoom;
-	line_info.y1 = pixel.y_axis * master.zoom;
+	line_info.x1 = (pixel.x_axis * master.zoom) + master.x_offset;
+	line_info.y1 = (pixel.y_axis * master.zoom) + master.y_offset;
 	if (flag == 'w')
 	{
-		line_info.x2 = (pixel.x_axis + 1) * master.zoom;
-		line_info.y2 = pixel.y_axis * master.zoom;
+		line_info.x2 = ((pixel.x_axis + 1) * master.zoom) + master.x_offset;
+		line_info.y2 = (pixel.y_axis * master.zoom) + master.y_offset;
 	}
 	else if (flag == 'h')
 	{
-		line_info.x2 = pixel.x_axis * master.zoom;
-		line_info.y2 = (pixel.y_axis + 1) * master.zoom;
+		line_info.x2 = (pixel.x_axis * master.zoom) + master.x_offset;
+		line_info.y2 = ((pixel.y_axis + 1) * master.zoom) + master.y_offset;
 	}
 	line_info.dx = line_info.x2 - line_info.x1;
 	line_info.dy = line_info.y2 - line_info.y1;
@@ -59,7 +69,7 @@ void	draw_line_closer_to_y_axis(t_line_info line_info, t_master *master,
 				line_info.x1++;
 			decision = decision + (2 * line_info.abs_dx - 2 * line_info.abs_dy);
 		}
-		mlx_put_pixel(master->image, line_info.x1, line_info.y1,
+		put_valid_pixel(master->image, line_info.x1, line_info.y1,
 			pixel.rgba_channel);
 		i++;
 	}
@@ -89,7 +99,7 @@ void	draw_line_closer_to_x_axis(t_line_info line_info, t_master *master,
 				line_info.y1++;
 			decision = decision + (2 * line_info.abs_dy - 2 * line_info.abs_dx);
 		}
-		mlx_put_pixel(master->image, line_info.x1, line_info.y1,
+		put_valid_pixel(master->image, line_info.x1, line_info.y1,
 			pixel.rgba_channel);
 		i++;
 	}
@@ -97,7 +107,7 @@ void	draw_line_closer_to_x_axis(t_line_info line_info, t_master *master,
 
 void	draw_line_bresenham(t_pixel pixel, char flag, t_master *master)
 {
-	t_line_info		line_info;
+	t_line_info	line_info;
 
 	line_info = set_bresenham_info(pixel, flag, *master);
 	mlx_put_pixel(master->image, line_info.x1, line_info.y1,
@@ -107,6 +117,7 @@ void	draw_line_bresenham(t_pixel pixel, char flag, t_master *master)
 	else
 		draw_line_closer_to_y_axis(line_info, master, pixel);
 }
+// checar se pixel está na tela ou não
 
 void	draw_map(t_master *master, int height, int width)
 {
