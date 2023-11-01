@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/30 17:50:20 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:56:56 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	main(int argc, char **argv)
 				0) < 0))
 		return (EXIT_FAILURE);
 	master.zoom = 20;
-	master.x_offset = 150;
-	master.y_offset = 150;
-	draw_map(&master, master.map_height, master.map_width);
+	master.x_offset = (WIDTH / 2) - (master.map_width / 2);
+	master.y_offset = (HEIGHT / 4) - (master.map_height / 2);
 	mlx_loop_hook(master.window, generic_key_hook, &master);
+	draw_map(&master, master.map_height, master.map_width);
 	mlx_loop(master.window);
 	mlx_terminate(master.window);
 	ft_free_ptr_array((void **)master.pixels, master.map_height);

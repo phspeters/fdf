@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/30 17:26:04 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/01 14:43:19 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_line_info
 
 typedef struct s_pixel
 {
-	uint32_t		x_axis;
-	uint32_t		y_axis;
+	int				x_axis;
+	int				y_axis;
 	int32_t			z_axis;
 	uint32_t		rgba_channel;
 }					t_pixel;
@@ -58,12 +58,11 @@ typedef struct s_master
 	t_pixel			**pixels;
 }					t_master;
 
-int					parse_args_and_map(int argc, char **argv, t_master *master);
-t_pixel				**read_map(char *filename, int width, int height);
-void				draw_map(t_master *master, int height, int width);
-void				draw_line_bresenham(t_pixel pixel, char flag,
-						t_master *master);
-void				generic_key_hook(void *param);
+int		parse_args_and_map(int argc, char **argv, t_master *master);
+t_pixel	**read_map(char *filename, int width, int height);
+void	draw_map(t_master *master, int height, int width);
+void	draw_line_bresenham(t_pixel start, t_pixel end, t_master *master);
+void	generic_key_hook(void *param);
+t_pixel	to_isometric_projection(t_pixel pixel);
 
-void				to_isometric_projection(t_pixel *pixel);
 #endif
