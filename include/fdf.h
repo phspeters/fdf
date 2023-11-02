@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/01 20:21:43 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:30:47 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 # define HEIGHT 1080
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
-# define _USE_MATH_DEFINES
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 typedef struct s_line_info
 {
@@ -36,6 +38,8 @@ typedef struct s_line_info
 	int				dy;
 	unsigned int	abs_dx;
 	unsigned int	abs_dy;
+	uint32_t		start_color;
+	uint32_t		end_color;
 }					t_line_info;
 
 typedef struct s_pixel
@@ -64,7 +68,9 @@ void	draw_map(t_master *master, int height, int width);
 void	draw_line_bresenham(t_pixel start, t_pixel end, t_master *master);
 void	generic_key_hook(void *param);
 t_pixel	to_isometric_projection(t_pixel pixel);
-
+t_pixel	apply_zoom(t_pixel pixel, int zoom);
+void	put_valid_pixel(mlx_image_t *img, int x, int y, uint32_t color);
+void	move_coordinate(int *coordinate, int direction);
 //temp
 void	print_map(t_pixel **pixels, int height, int width);
 void	map_to_iso(t_pixel **pixels, int height, int width);

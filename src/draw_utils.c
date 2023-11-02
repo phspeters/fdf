@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transformation.c                                   :+:      :+:    :+:   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:55:06 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/01 21:10:08 by pehenri2         ###   ########.fr       */
+/*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
+/*   Updated: 2023/11/02 15:33:31 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	put_valid_pixel(mlx_image_t *img, int x, int y, uint32_t color)
+{
+	if ((x > 0 && x < WIDTH) && (y > 0 && y < HEIGHT))
+		mlx_put_pixel(img, x, y, color);
+}
+
+void	move_coordinate(int *coordinate, int direction)
+{
+	if (direction < 0)
+		*coordinate -= 1;
+	else
+		*coordinate += 1;
+}
+
+t_pixel	apply_zoom(t_pixel pixel, int zoom)
+{
+	t_pixel	zoomed_pixel;
+
+	zoomed_pixel.x_axis = pixel.x_axis * zoom;
+	zoomed_pixel.y_axis = pixel.y_axis * zoom;
+	zoomed_pixel.z_axis = pixel.z_axis * zoom;
+	return (zoomed_pixel);
+}
 
 t_pixel	to_isometric_projection(t_pixel pixel)
 {
