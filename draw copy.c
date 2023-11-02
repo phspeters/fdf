@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/01 21:17:22 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:49:07 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_line_closer_to_y_axis(t_line_info line_info, t_master *master,
 	unsigned int	i;
 
 	put_valid_pixel(master->image, line_info.x1, line_info.y1, color);
-	decision = 2 * line_info.dx - line_info.dy;
+	decision = 2 * line_info.abs_dx - line_info.abs_dy;
 	i = 0;
 	while (i < line_info.abs_dy)
 	{
@@ -72,7 +72,7 @@ void	draw_line_closer_to_x_axis(t_line_info line_info, t_master *master,
 	unsigned int	i;
 
 	put_valid_pixel(master->image, line_info.x1, line_info.y1, color);
-	decision = 2 * line_info.dy - line_info.dx;
+	decision = 2 * line_info.abs_dy - line_info.abs_dx;
 	i = 0;
 	while (i < line_info.abs_dx)
 	{
@@ -92,12 +92,12 @@ void	draw_line_closer_to_x_axis(t_line_info line_info, t_master *master,
 void	draw_line_bresenham(t_pixel start, t_pixel end, t_master *master)
 {
 	t_line_info	line_info;
-	//t_pixel		iso_start;
-	//t_pixel		iso_end;
+	t_pixel		iso_start;
+	t_pixel		iso_end;
 
-	//iso_start = to_isometric_projection(start);
-	//iso_end = to_isometric_projection(end);
-	line_info = set_line_info(start, end, *master);
+	iso_start = to_isometric_projection(start);
+	iso_end = to_isometric_projection(end);
+	line_info = set_line_info(iso_start, iso_end, *master);
 	if (line_info.abs_dx > line_info.abs_dy)
 		draw_line_closer_to_x_axis(line_info, master, 0xFFFFFFFF);
 	else
