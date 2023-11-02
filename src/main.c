@@ -6,14 +6,11 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/02 15:18:29 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:39:44 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-//***** Remember to initiate structs
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
