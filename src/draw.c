@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/02 15:31:47 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:52:50 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@ t_line_info	set_line_info(t_pixel start, t_pixel end, t_master master)
 	end = apply_zoom(end, master.zoom);
 	iso_start = to_isometric_projection(start);
 	iso_end = to_isometric_projection(end);
+	//
 	line_info.x1 = iso_start.x_axis + master.x_offset;
 	line_info.y1 = iso_start.y_axis + master.y_offset;
 	line_info.x2 = iso_end.x_axis + master.x_offset;
 	line_info.y2 = iso_end.y_axis + master.y_offset;
+	//
 	line_info.dx = line_info.x2 - line_info.x1;
 	line_info.dy = line_info.y2 - line_info.y1;
 	line_info.abs_dx = abs(line_info.dx);
 	line_info.abs_dy = abs(line_info.dy);
-	line_info.start_color = 0xFFFFFFFF;
-	//line_info.start_color = start.rgba_channel;
-	//line_info.end_color = end.rgba_channel;
+	line_info.start_color = start.rgba_channel;
+	line_info.end_color = end.rgba_channel;
 	return (line_info);
 }
 

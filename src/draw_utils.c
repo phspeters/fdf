@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/02 15:33:31 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:27:21 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_pixel	apply_zoom(t_pixel pixel, int zoom)
 	zoomed_pixel.x_axis = pixel.x_axis * zoom;
 	zoomed_pixel.y_axis = pixel.y_axis * zoom;
 	zoomed_pixel.z_axis = pixel.z_axis * zoom;
+	zoomed_pixel.rgba_channel = pixel.rgba_channel;
 	return (zoomed_pixel);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/27 16:03:13 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:33:14 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static uint32_t	get_color(char *coordinate)
 		color = (ft_atoi_base(hexadecimal, "0123456789abcdef") << 8) | 0xff;
 		return (color);
 	}
-	return (-1);
+	return (0xffffffff);
 }
 
 static void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
