@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:11:54 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/01 20:26:54 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:25:42 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	map_to_iso(t_pixel **pixels, int height, int width)
 		w = 0;
 		while (w < width)
 		{
-			pixels[h][w] = to_isometric_projection(pixels[h][w]);
+			pixels[h][w] = to_isometric(pixels[h][w]);
 			w++;
 		}
 		h++;

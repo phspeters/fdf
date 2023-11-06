@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/03 16:27:21 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:31:15 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,18 @@ t_pixel	apply_zoom(t_pixel pixel, int zoom)
 	return (zoomed_pixel);
 }
 
-t_pixel	to_isometric_projection(t_pixel pixel)
+t_line_info	apply_offset(t_pixel start, t_pixel end, t_master master)
+{
+	t_line_info	line_info;
+
+	line_info.x1 = start.x_axis + master.x_offset;
+	line_info.y1 = start.y_axis + master.y_offset;
+	line_info.x2 = end.x_axis + master.x_offset;
+	line_info.y2 = end.y_axis + master.y_offset;
+	return (line_info);
+}
+
+t_pixel	to_isometric(t_pixel pixel)
 {
 	t_pixel	new_pixel;
 	float	angle;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/03 16:12:39 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:13:43 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	main(int argc, char **argv)
 	if (!master.image || (mlx_image_to_window(master.window, master.image, 0,
 				0) < 0))
 		return (EXIT_FAILURE);
-	master.zoom = 50;
-	master.x_offset = (WIDTH / 2) - (master.map_width / 2);
-	master.y_offset = (HEIGHT / 4) - (master.map_height / 2);
+	init_camera(&master);
 	draw_map(&master, master.map_height, master.map_width);
 	mlx_loop_hook(master.window, generic_key_hook, &master);
 	mlx_loop(master.window);
