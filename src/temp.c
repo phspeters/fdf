@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:11:54 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/06 12:25:42 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:25:20 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	print_map(t_pixel **pixels, int height, int width)
 		w = 0;
 		while (w < width)
 		{
-			printf("x[%d][%d]:%d ", h, w, pixels[h][w].x_axis);
-			printf("y[%d][%d]:%d ", h, w, pixels[h][w].y_axis);
-			printf("z[%d][%d]:%d ", h, w, pixels[h][w].z_axis);
+			printf("x[%d][%d]:%f ", h, w, pixels[h][w].x_axis);
+			printf("y[%d][%d]:%f ", h, w, pixels[h][w].y_axis);
+			printf("z[%d][%d]:%f ", h, w, pixels[h][w].z_axis);
 			printf("\n");
 			w++;
 		}

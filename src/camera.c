@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:02:20 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/07 14:41:05 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:30:29 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,12 @@ int	get_y_offset(t_master master)
 
 void	init_camera(t_master *master)
 {
-	master->pixel_distance = fmin((WIDTH / master->map_width), (HEIGHT / master->map_height));
+	float	width_distance;
+	float	height_distance;
+
+	width_distance = (WIDTH / (float)master->map_width);
+	height_distance = (HEIGHT / (float)master->map_height);
+	master->pixel_distance = fminf(width_distance, height_distance) * 0.9;
 	master->x_offset = WIDTH / 2 - get_x_offset(*master);
 	master->y_offset = HEIGHT / 2 - get_y_offset(*master);
 }

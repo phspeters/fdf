@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/07 16:31:34 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:26:33 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	move_coordinate(int *coordinate, int direction)
 		*coordinate += 1;
 }
 
-t_pixel	apply_distance(t_pixel pixel, int pixel_distance)
+t_pixel	apply_distance(t_pixel pixel, float pixel_distance)
 {
 	t_pixel	space_pixel;
 
@@ -54,9 +54,9 @@ t_pixel	to_isometric(t_pixel pixel)
 	float	angle;
 
 	angle = 30 * (M_PI / 180);
-	new_pixel.x_axis = round((pixel.x_axis - pixel.y_axis) * cos(angle));
-	new_pixel.y_axis = round((pixel.x_axis + pixel.y_axis) * sin(angle)
-			- (pixel.z_axis));
+	new_pixel.x_axis = (pixel.x_axis - pixel.y_axis) * cos(angle);
+	new_pixel.y_axis = (pixel.x_axis + pixel.y_axis) * sin(angle)
+		- (pixel.z_axis);
 	new_pixel.z_axis = pixel.z_axis;
 	new_pixel.rgba_channel = pixel.rgba_channel;
 	return (new_pixel);
