@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/07 14:41:38 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 16:31:34 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_pixel	apply_distance(t_pixel pixel, int pixel_distance)
 	return (space_pixel);
 }
 
-t_line_info	apply_offset(t_pixel start, t_pixel end, t_master master)
+t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_master master)
 {
 	t_line_info	line_info;
 

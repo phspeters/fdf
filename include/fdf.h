@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/07 16:27:07 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 16:30:52 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void				draw_line_bresenham(t_pixel start, t_pixel end,
 void				generic_key_hook(void *param);
 t_pixel				to_isometric(t_pixel pixel);
 t_pixel				apply_distance(t_pixel pixel, int pixel_distance);
-t_line_info			apply_offset(t_pixel start, t_pixel end, t_master master);
+t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_master master);
 void				put_valid_pixel(mlx_image_t *img, int x, int y,
 						uint32_t color);
 void				move_coordinate(int *coordinate, int direction);
