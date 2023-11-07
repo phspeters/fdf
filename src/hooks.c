@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/06 16:20:10 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:33:48 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	generic_key_hook(void *param)
 	if (mlx_is_key_down(master->window, MLX_KEY_D))
 		master->x_offset += 10;
 	if (mlx_is_key_down(master->window, MLX_KEY_Q))
-		master->zoom -= 1;
+		master->pixel_distance -= 1;
 	if (mlx_is_key_down(master->window, MLX_KEY_E))
-		master->zoom += 1;
+		master->pixel_distance += 1;
 	mlx_delete_image(master->window, master->image);
 	master->image = mlx_new_image(master->window, WIDTH, HEIGHT);
 	mlx_image_to_window(master->window, master->image, 0, 0);

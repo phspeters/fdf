@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/06 12:31:37 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:34:57 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_line_info	set_line_info(t_pixel start, t_pixel end, t_master master)
 	t_pixel		iso_start;
 	t_pixel		iso_end;
 
-	start = apply_zoom(start, master.zoom);
-	end = apply_zoom(end, master.zoom);
+	start = apply_distance(start, master.pixel_distance);
+	end = apply_distance(end, master.pixel_distance);
 	iso_start = to_isometric(start);
 	iso_end = to_isometric(end);
 	line_info = apply_offset(iso_start, iso_end, master);

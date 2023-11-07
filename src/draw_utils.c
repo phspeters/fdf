@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/06 16:31:15 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:41:38 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	move_coordinate(int *coordinate, int direction)
 		*coordinate += 1;
 }
 
-t_pixel	apply_zoom(t_pixel pixel, int zoom)
+t_pixel	apply_distance(t_pixel pixel, int pixel_distance)
 {
-	t_pixel	zoomed_pixel;
+	t_pixel	space_pixel;
 
-	zoomed_pixel.x_axis = pixel.x_axis * zoom;
-	zoomed_pixel.y_axis = pixel.y_axis * zoom;
-	zoomed_pixel.z_axis = pixel.z_axis * zoom;
-	zoomed_pixel.rgba_channel = pixel.rgba_channel;
-	return (zoomed_pixel);
+	space_pixel.x_axis = pixel.x_axis * pixel_distance;
+	space_pixel.y_axis = pixel.y_axis * pixel_distance;
+	space_pixel.z_axis = pixel.z_axis * pixel_distance * 0.5;
+	space_pixel.rgba_channel = pixel.rgba_channel;
+	return (space_pixel);
 }
 
 t_line_info	apply_offset(t_pixel start, t_pixel end, t_master master)
