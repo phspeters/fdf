@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/07 17:26:33 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:20:24 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	move_coordinate(int *coordinate, int direction)
 
 t_pixel	apply_distance(t_pixel pixel, float pixel_distance)
 {
-	t_pixel	space_pixel;
+	t_pixel	spaced_pixel;
 
-	space_pixel.x_axis = pixel.x_axis * pixel_distance;
-	space_pixel.y_axis = pixel.y_axis * pixel_distance;
-	space_pixel.z_axis = pixel.z_axis * pixel_distance * 0.5;
-	space_pixel.rgba_channel = pixel.rgba_channel;
-	return (space_pixel);
+	spaced_pixel.x_axis = pixel.x_axis * pixel_distance;
+	spaced_pixel.y_axis = pixel.y_axis * pixel_distance;
+	spaced_pixel.z_axis = pixel.z_axis * pixel_distance * 0.25;
+	spaced_pixel.rgba_channel = pixel.rgba_channel;
+	return (spaced_pixel);
 }
 
 t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_master master)

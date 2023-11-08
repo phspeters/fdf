@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@42sp.com.br>            +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/03 16:33:14 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:20:49 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static uint32_t	get_color(char *coordinate)
 	char		*hexadecimal;
 	uint32_t	color;
 
-	x_address = ft_strchr(coordinate, 'x');
+	x_address = ft_strchr(coordinate, ',');
 	if (x_address)
 	{
-		hexadecimal = ft_strtolower(x_address + 1);
+		hexadecimal = ft_strtolower(x_address + 3);
 		color = (ft_atoi_base(hexadecimal, "0123456789abcdef") << 8) | 0xff;
 		return (color);
 	}
