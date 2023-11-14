@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 12:20:35 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:27:50 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void	generic_key_hook(void *param)
 {
-	t_master	*master;
+	t_fdf	*fdf;
 
-	master = param;
-	if (mlx_is_key_down(master->window, MLX_KEY_ESCAPE))
-		mlx_close_window(master->window);
+	fdf = param;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_ESCAPE))
+		mlx_close_window(fdf->window);
 	//bonus
-	if (mlx_is_key_down(master->window, MLX_KEY_W))
-		master->y_offset -= 10;
-	if (mlx_is_key_down(master->window, MLX_KEY_S))
-		master->y_offset += 10;
-	if (mlx_is_key_down(master->window, MLX_KEY_A))
-		master->x_offset -= 10;
-	if (mlx_is_key_down(master->window, MLX_KEY_D))
-		master->x_offset += 10;
-	if (mlx_is_key_down(master->window, MLX_KEY_Q))
-		master->pixel_distance *= 0.9;
-	if (mlx_is_key_down(master->window, MLX_KEY_E))
-		master->pixel_distance *= 1.1;
-	mlx_delete_image(master->window, master->image);
-	master->image = mlx_new_image(master->window, WIDTH, HEIGHT);
-	mlx_image_to_window(master->window, master->image, 0, 0);
-	draw_map(master, master->map_height, master->map_width);
+	if (mlx_is_key_down(fdf->window, MLX_KEY_W))
+		fdf->camera.y_offset -= 10;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_S))
+		fdf->camera.y_offset += 10;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_A))
+		fdf->camera.x_offset -= 10;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_D))
+		fdf->camera.x_offset += 10;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_Q))
+		fdf->camera.pixel_distance *= 0.9;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_E))
+		fdf->camera.pixel_distance *= 1.1;
+	mlx_delete_image(fdf->window, fdf->image);
+	fdf->image = mlx_new_image(fdf->window, WIDTH, HEIGHT);
+	mlx_image_to_window(fdf->window, fdf->image, 0, 0);
+	draw_map(fdf, fdf->projections.map_height, fdf->projections.map_width);
 }

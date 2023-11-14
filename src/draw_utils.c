@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 14:20:24 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:46:12 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ t_pixel	apply_distance(t_pixel pixel, float pixel_distance)
 	return (spaced_pixel);
 }
 
-t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_master master)
+t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_fdf fdf)
 {
 	t_line_info	line_info;
 
-	line_info.x1 = start.x_axis + master.x_offset;
-	line_info.y1 = start.y_axis + master.y_offset;
-	line_info.x2 = end.x_axis + master.x_offset;
-	line_info.y2 = end.y_axis + master.y_offset;
+	line_info.x1 = start.x_axis + fdf.camera.x_offset;
+	line_info.y1 = start.y_axis + fdf.camera.y_offset;
+	line_info.x2 = end.x_axis + fdf.camera.x_offset;
+	line_info.y2 = end.y_axis + fdf.camera.y_offset;
 	return (line_info);
 }
 

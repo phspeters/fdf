@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/07 17:24:57 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:18:24 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ typedef struct s_line_info
 	uint32_t		end_color;
 }					t_line_info;
 
+typedef struct s_camera
+{
+	float			pixel_distance;
+	int				x_offset;
+	int				y_offset;
+}					t_camera;
+
 typedef struct s_pixel
 {
 	float			x_axis;
@@ -47,31 +54,46 @@ typedef struct s_pixel
 	uint32_t		rgba_channel;
 }					t_pixel;
 
-typedef struct s_master
+typedef struct s_map
+{
+	t_pixel			**pixels;
+	int				x_max;
+	int				x_min;
+	int				y_max;
+	int				y_min;
+	int				z_max;
+	int				z_min;
+}					t_map;
+
+typedef struct s_projections
+{
+	unsigned int	map_height;
+	unsigned int	map_width;
+	t_maps			parallel;
+	t_maps			isometric;
+}					t_projections;
+
+typedef struct s_fdf
 {
 	mlx_t			*window;
 	mlx_image_t		*image;
-	unsigned int	map_height;
-	unsigned int	map_width;
-	float			pixel_distance;
-	int				x_offset;
-	int				y_offset;
-	t_pixel			**pixels;
-}					t_master;
+	t_camera		camera;
+	t_projections	projections;
+}					t_fdf;
 
-int					parse_args_and_map(int argc, char **argv, t_master *master);
-t_pixel				**read_map(char *filename, int width, int height);
-void				draw_map(t_master *master, int height, int width);
+int					parse_args_and_map(int argc, char **argv, t_fdf *fdf);
+t_pixel				**read_map(char *filename, t_fdf fdf);
+void				draw_map(t_fdf *fdf, int height, int width);
 void				draw_line_bresenham(t_pixel start, t_pixel end,
-						t_master *master);
+						t_fdf *fdf);
 void				generic_key_hook(void *param);
 t_pixel				to_isometric(t_pixel pixel);
 t_pixel				apply_distance(t_pixel pixel, float pixel_distance);
-t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_master master);
+t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_fdf fdf);
 void				put_valid_pixel(mlx_image_t *img, int x, int y,
 						uint32_t color);
 void				move_coordinate(int *coordinate, int direction);
-void				init_camera(t_master *master);
+void				init_camera(t_fdf *fdf);
 // temp
 void				print_map(t_pixel **pixels, int height, int width);
 void				map_to_iso(t_pixel **pixels, int height, int width);

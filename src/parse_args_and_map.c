@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 12:20:46 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:35:35 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static unsigned int	get_height_and_check_width(int fd, unsigned int map_width)
 	return (height);
 }
 
-int	parse_args_and_map(int argc, char **argv, t_master *master)
+int	parse_args_and_map(int argc, char **argv, t_fdf *fdf)
 {
 	int		fd;
 	char	*line;
@@ -73,11 +73,11 @@ int	parse_args_and_map(int argc, char **argv, t_master *master)
 	if (fd < 0)
 		return (ft_printf("Invalid filename"));
 	line = ft_get_next_line(fd);
-	master->map_width = get_width(line);
-	master->map_height = get_height_and_check_width(fd, master->map_width);
+	fdf->projections.map_width = get_width(line);
+	fdf->projections.map_height = get_height_and_check_width(fd, fdf->projections.map_width);
 	close(fd);
 	free(line);
-	if (master->map_height < 3 || master->map_width < 3)
+	if (fdf->projections.map_height < 3 || fdf->projections.map_width < 3)
 		return (EXIT_FAILURE);
 	else
 		return (EXIT_SUCCESS);

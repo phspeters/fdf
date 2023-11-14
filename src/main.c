@@ -6,33 +6,35 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 12:20:30 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:08:33 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+// ler o mapa e guardar no parallel, iniciar
 int	main(int argc, char **argv)
 {
-	t_master	master;
+	t_fdf	fdf;
 
-	if (parse_args_and_map(argc, argv, &master))
+	if (parse_args_and_map(argc, argv, &fdf))
 		return (EXIT_FAILURE);
-	master.pixels = read_map(argv[1], master.map_width, master.map_height);
-	if (!master.pixels)
+	fdf.projections.parallel.pixels = read_map(argv[1], fdf);
+	if (!fdf.projections.parallel.pixels)
 		return (EXIT_FAILURE);
-	master.window = mlx_init(WIDTH, HEIGHT, "pehenri2 - fdf", true);
-	if (!master.window)
+	fdf.window = mlx_init(WIDTH, HEIGHT, "pehenri2 - fdf", true);
+	if (!fdf.window)
 		return (EXIT_FAILURE);
-	master.image = mlx_new_image(master.window, WIDTH, HEIGHT);
-	if (!master.image || (mlx_image_to_window(master.window, master.image, 0,
+	fdf.image = mlx_new_image(fdf.window, WIDTH, HEIGHT);
+	if (!fdf.image || (mlx_image_to_window(fdf.window, fdf.image, 0,
 				0) < 0))
 		return (EXIT_FAILURE);
-	init_camera(&master);
-	draw_map(&master, master.map_height, master.map_width);
-	mlx_loop_hook(master.window, generic_key_hook, &master);
-	mlx_loop(master.window);
-	mlx_terminate(master.window);
-	ft_free_ptr_array((void **)master.pixels, master.map_height);
+	init_projections(&fdf);
+	init_camera(&fdf);
+	draw_map(&fdf, fdf.projections.map_height, fdf.projections.map_width);
+	mlx_loop_hook(fdf.window, generic_key_hook, &fdf);
+	mlx_loop(fdf.window);
+	mlx_terminate(fdf.window);
+	ft_free_ptr_array((void **)fdf.projections.parallel.pixels, fdf.projections.map_height);
+	//ft_free_ptr_array((void **)fdf.projections.isometric.pixels, fdf.projections.map_height);
 	return (EXIT_SUCCESS);
 }

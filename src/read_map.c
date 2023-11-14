@@ -6,13 +6,13 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 12:20:49 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:48:00 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static char	**get_line_of_coordinates(int fd)
+static char	**get_coordinates_from_line(int fd)
 {
 	char	*line;
 	char	**coordinates;
@@ -47,30 +47,30 @@ static void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 	pixel->rgba_channel = get_color(str);
 }
 
-t_pixel	**read_map(char *filename, int width, int height)
+t_pixel	**read_map(char *filename, t_fdf fdf)
 {
-	t_pixel	**pixels;
-	int		h;
-	int		w;
-	int		fd;
-	char	**splitted_line;
+	t_pixel			**map;
+	unsigned int	h;
+	unsigned int	w;
+	int				fd;
+	char			**splitted_line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	pixels = malloc(height * sizeof(t_pixel *));
+	map = malloc(fdf.projections.map_height * sizeof(t_pixel *));
 	splitted_line = NULL;
 	h = -1;
-	while (++h < height)
+	while (++h < fdf.projections.map_height)
 	{
-		pixels[h] = malloc(width * sizeof(t_pixel));
+		map[h] = malloc(fdf.projections.map_width * sizeof(t_pixel));
 		ft_free_str_array(splitted_line);
-		splitted_line = get_line_of_coordinates(fd);
+		splitted_line = get_coordinates_from_line(fd);
 		w = -1;
-		while (++w < width)
-			populate_pixel_matrix(&pixels[h][w], splitted_line[w], h, w);
+		while (++w < fdf.projections.map_width)
+			populate_pixel_matrix(&map[h][w], splitted_line[w], h, w);
 	}
 	ft_free_str_array(splitted_line);
 	close(fd);
-	return (pixels);
+	return (map);
 }
