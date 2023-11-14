@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 19:18:24 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:20:29 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,15 @@ typedef struct s_map
 	int				z_min;
 }					t_map;
 
-typedef struct s_projections
-{
-	unsigned int	map_height;
-	unsigned int	map_width;
-	t_maps			parallel;
-	t_maps			isometric;
-}					t_projections;
-
 typedef struct s_fdf
 {
 	mlx_t			*window;
 	mlx_image_t		*image;
-	t_camera		camera;
-	t_projections	projections;
+	t_camera		camera;	
+	t_map			parallel_map;
+	t_map			isometric_map;
+	unsigned int	map_height;
+	unsigned int	map_width;
 }					t_fdf;
 
 int					parse_args_and_map(int argc, char **argv, t_fdf *fdf);
