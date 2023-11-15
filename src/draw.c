@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 18:50:06 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:36:59 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_line_info	set_line_info(t_pixel start, t_pixel end, t_fdf fdf)
 	t_pixel		iso_start;
 	t_pixel		iso_end;
 
-	start = apply_distance(start, fdf.camera.pixel_distance);
-	end = apply_distance(end, fdf.camera.pixel_distance);
+	start = apply_proportion(start, fdf.camera.proportion);
+	end = apply_proportion(end, fdf.camera.proportion);
 	iso_start = to_isometric(start);
 	iso_end = to_isometric(end);
 	line_info = get_x_and_y(iso_start, iso_end, fdf);
@@ -106,11 +106,11 @@ void	draw_map(t_fdf *fdf, int height, int width)
 		while (w < width)
 		{
 			if (w < width - 1)
-				draw_line_bresenham(fdf->projections.parallel.pixels[h][w],
-					fdf->projections.parallel.pixels[h][w + 1], fdf);
+				draw_line_bresenham(fdf->parallel.pixels[h][w],
+					fdf->parallel.pixels[h][w + 1], fdf);
 			if (h < height - 1)
-				draw_line_bresenham(fdf->projections.parallel.pixels[h][w],
-					fdf->projections.parallel.pixels[h + 1][w], fdf);
+				draw_line_bresenham(fdf->parallel.pixels[h][w],
+					fdf->parallel.pixels[h + 1][w], fdf);
 			w++;
 		}
 		h++;

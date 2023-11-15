@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 18:48:00 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:31:53 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,16 @@ static void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 	pixel->rgba_channel = get_color(str);
 }
 
-t_pixel	**read_map(char *filename, t_fdf fdf)
+void	set_min_and_max_z(int z_axis, t_map_info *map_info)
+{
+	if (z_axis > map_info->max_z)
+		map_info->max_z = z_axis;
+	if (z_axis < map_info->min_z)
+		map_info->min_z = z_axis;
+}
+
+//checar se não está tendo leak após mudanças
+t_pixel	**read_map(char *filename, t_map_info *map_info)
 {
 	t_pixel			**map;
 	unsigned int	h;
@@ -58,19 +67,20 @@ t_pixel	**read_map(char *filename, t_fdf fdf)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	map = malloc(fdf.projections.map_height * sizeof(t_pixel *));
-	splitted_line = NULL;
+	map = malloc(map_info->height * sizeof(t_pixel *));
 	h = -1;
-	while (++h < fdf.projections.map_height)
+	while (++h < map_info->height)
 	{
-		map[h] = malloc(fdf.projections.map_width * sizeof(t_pixel));
-		ft_free_str_array(splitted_line);
+		map[h] = malloc(map_info->width * sizeof(t_pixel));
 		splitted_line = get_coordinates_from_line(fd);
 		w = -1;
-		while (++w < fdf.projections.map_width)
+		while (++w < map_info->width)
+		{
 			populate_pixel_matrix(&map[h][w], splitted_line[w], h, w);
+			set_min_and_max_z(map[h][w].z_axis, map_info);
+		}
+		ft_free_str_array(splitted_line);
 	}
-	ft_free_str_array(splitted_line);
 	close(fd);
 	return (map);
 }

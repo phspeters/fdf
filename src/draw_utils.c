@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 17:46:12 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:43:53 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	move_coordinate(int *coordinate, int direction)
 		*coordinate += 1;
 }
 
-t_pixel	apply_distance(t_pixel pixel, float pixel_distance)
+t_pixel	apply_proportion(t_pixel pixel, float proportion)
 {
 	t_pixel	spaced_pixel;
 
-	spaced_pixel.x_axis = pixel.x_axis * pixel_distance;
-	spaced_pixel.y_axis = pixel.y_axis * pixel_distance;
-	spaced_pixel.z_axis = pixel.z_axis * pixel_distance * 0.25;
+	spaced_pixel.x_axis = pixel.x_axis * proportion;
+	spaced_pixel.y_axis = pixel.y_axis * proportion;
+	spaced_pixel.z_axis = pixel.z_axis * proportion;
 	spaced_pixel.rgba_channel = pixel.rgba_channel;
 	return (spaced_pixel);
 }

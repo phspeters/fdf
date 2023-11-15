@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 18:35:35 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:38:16 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ int	parse_args_and_map(int argc, char **argv, t_fdf *fdf)
 	if (fd < 0)
 		return (ft_printf("Invalid filename"));
 	line = ft_get_next_line(fd);
-	fdf->projections.map_width = get_width(line);
-	fdf->projections.map_height = get_height_and_check_width(fd, fdf->projections.map_width);
+	fdf->map_info.width = get_width(line);
+	fdf->map_info.height = get_height_and_check_width(fd, fdf->map_info.width);
 	close(fd);
 	free(line);
-	if (fdf->projections.map_height < 3 || fdf->projections.map_width < 3)
+	if (fdf->map_info.height < 3 || fdf->map_info.width < 3)
 		return (EXIT_FAILURE);
 	else
 		return (EXIT_SUCCESS);

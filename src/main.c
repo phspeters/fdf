@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 20:24:57 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:37:43 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	main(int argc, char **argv)
 
 	if (parse_args_and_map(argc, argv, &fdf))
 		return (EXIT_FAILURE);
-	fdf.parallel_map.pixels = read_map(argv[1], fdf);
-	if (!fdf.parallel_map.pixels)
+	fdf.parallel.pixels = read_map(argv[1], &fdf.map_info);
+	if (!fdf.parallel.pixels)
 		return (EXIT_FAILURE);
 	fdf.window = mlx_init(WIDTH, HEIGHT, "pehenri2 - fdf", true);
 	if (!fdf.window)
@@ -30,11 +30,11 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	init_camera(&fdf);
 	init_projections(&fdf);
-	draw_map(&fdf, fdf.map_height, fdf.map_width);
+	draw_map(&fdf, fdf.map_info.height, fdf.map_info.width);
 	mlx_loop_hook(fdf.window, generic_key_hook, &fdf);
 	mlx_loop(fdf.window);
 	mlx_terminate(fdf.window);
-	ft_free_ptr_array((void **)fdf.parallel_map.pixels, fdf.map_height);
-	ft_free_ptr_array((void **)fdf.isometric_map.pixels, fdf.map_height);
+	ft_free_ptr_array((void **)fdf.parallel.pixels, fdf.map_info.height);
+	ft_free_ptr_array((void **)fdf.isometric.pixels, fdf.map_info.height);
 	return (EXIT_SUCCESS);
 }

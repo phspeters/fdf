@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 20:20:29 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:32:29 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_line_info
 
 typedef struct s_camera
 {
-	float			pixel_distance;
+	float			proportion;
+	float			zoom;
 	int				x_offset;
 	int				y_offset;
 }					t_camera;
@@ -54,6 +55,15 @@ typedef struct s_pixel
 	uint32_t		rgba_channel;
 }					t_pixel;
 
+typedef struct s_map_info
+{
+	unsigned int	height;
+	unsigned int	width;
+	int				max_z;
+	int				min_z;
+}					t_map_info;
+
+//trocar name para de pixels para map?
 typedef struct s_map
 {
 	t_pixel			**pixels;
@@ -61,29 +71,26 @@ typedef struct s_map
 	int				x_min;
 	int				y_max;
 	int				y_min;
-	int				z_max;
-	int				z_min;
 }					t_map;
 
 typedef struct s_fdf
 {
 	mlx_t			*window;
 	mlx_image_t		*image;
-	t_camera		camera;	
-	t_map			parallel_map;
-	t_map			isometric_map;
-	unsigned int	map_height;
-	unsigned int	map_width;
+	t_camera		camera;
+	t_map_info		map_info;
+	t_map			parallel;
+	t_map			isometric;
 }					t_fdf;
 
 int					parse_args_and_map(int argc, char **argv, t_fdf *fdf);
-t_pixel				**read_map(char *filename, t_fdf fdf);
+t_pixel				**read_map(char *filename, t_map_info *map_info);
 void				draw_map(t_fdf *fdf, int height, int width);
 void				draw_line_bresenham(t_pixel start, t_pixel end,
 						t_fdf *fdf);
 void				generic_key_hook(void *param);
 t_pixel				to_isometric(t_pixel pixel);
-t_pixel				apply_distance(t_pixel pixel, float pixel_distance);
+t_pixel				apply_proportion(t_pixel pixel, float proportion);
 t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_fdf fdf);
 void				put_valid_pixel(mlx_image_t *img, int x, int y,
 						uint32_t color);
