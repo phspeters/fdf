@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/15 08:12:41 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:48:37 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <MLX42/MLX42.h>
 # include <fcntl.h>
 # include <libft.h>
+# include <limits.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -59,11 +60,13 @@ typedef struct s_map_info
 {
 	unsigned int	height;
 	unsigned int	width;
+	float			x_offset;
+	float			y_offset;
 	int				max_z;
 	int				min_z;
 }					t_map_info;
 
-//trocar name para de pixels para map?
+// trocar name para de pixels para map?
 typedef struct s_map
 {
 	t_pixel			**pixels;
@@ -81,23 +84,27 @@ typedef struct s_fdf
 	t_map_info		map_info;
 	t_map			parallel;
 	t_map			isometric;
+	t_map			*current_map;
 }					t_fdf;
 
 int					parse_args_and_map(int argc, char **argv, t_fdf *fdf);
 t_pixel				**read_map(char *filename, t_map_info *map_info);
-void				draw_map(t_fdf *fdf, int height, int width);
-void				draw_line_bresenham(t_pixel start, t_pixel end,
-						t_fdf *fdf);
+void				draw_map(t_map *map, t_map_info map_info, t_fdf *fdf);
+void				draw_line_bresenham(t_pixel start, t_pixel end, t_fdf *fdf);
 void				generic_key_hook(void *param);
-t_pixel				to_isometric(t_pixel pixel);
-t_pixel				apply_proportion(t_pixel pixel, float proportion);
-t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_fdf fdf);
+void				to_isometric(t_pixel *pixel);
+void				apply_proportion(t_pixel *pixel, float proportion);
+t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_camera camera);
 void				put_valid_pixel(mlx_image_t *img, int x, int y,
 						uint32_t color);
 void				move_coordinate(int *coordinate, int direction);
 void				init_camera_params(t_fdf *fdf);
+void				apply_camera_params(t_map *map, t_map_info map_info,
+						t_camera camera);
+void				init_projections(t_fdf *fdf);
+void				refresh_corner_pixels(t_pixel pixel, t_map *map);
 // temp
 void				print_map(t_pixel **pixels, int height, int width);
 void				map_to_iso(t_pixel **pixels, int height, int width);
-
+void				print_pixel(t_pixel pixel);
 #endif

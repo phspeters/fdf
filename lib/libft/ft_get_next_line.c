@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:02:24 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/12 15:27:45 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:46:30 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ char	*ft_get_next_line(int fd)
 	static char	*remaining_line[1024];
 	int			bytes_read;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		if (remaining_line[-fd] != NULL)
+			return (ft_free_str(remaining_line[-fd]));
+		return (NULL);
+	}
 	line_read = initialize_and_check_errors(fd, &remaining_line[fd], &buff,
 			&bytes_read);
 	if (line_read == NULL)

@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:11:54 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 12:20:53 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:35:14 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ void	print_map(t_pixel **pixels, int height, int width)
 	}
 }
 
+void	print_pixel(t_pixel pixel)
+{
+	printf("x_axis: %f\n", pixel.x_axis);
+	printf("y_axis: %f\n", pixel.y_axis);
+	printf("z_axis: %f\n", pixel.z_axis);
+	printf("rgba_channel: %u\n", pixel.rgba_channel);
+}
+
 void	map_to_iso(t_pixel **pixels, int height, int width)
 {
 	int	h;
@@ -45,7 +53,7 @@ void	map_to_iso(t_pixel **pixels, int height, int width)
 		w = 0;
 		while (w < width)
 		{
-			pixels[h][w] = to_isometric(pixels[h][w]);
+			to_isometric(&pixels[h][w]);
 			w++;
 		}
 		h++;

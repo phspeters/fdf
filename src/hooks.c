@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 22:35:51 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:37:40 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	generic_key_hook(void *param)
 	mlx_delete_image(fdf->window, fdf->image);
 	fdf->image = mlx_new_image(fdf->window, WIDTH, HEIGHT);
 	mlx_image_to_window(fdf->window, fdf->image, 0, 0);
-	draw_map(fdf, fdf->map_info.height, fdf->map_info.width);
+	draw_map(fdf->current_map, fdf->map_info, fdf);
 }

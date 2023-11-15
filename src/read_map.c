@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 22:31:53 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:51:29 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 	pixel->rgba_channel = get_color(str);
 }
 
-void	set_min_and_max_z(int z_axis, t_map_info *map_info)
+void	refresh_min_and_max_z(int z_axis, t_map_info *map_info)
 {
 	if (z_axis > map_info->max_z)
 		map_info->max_z = z_axis;
@@ -77,7 +77,7 @@ t_pixel	**read_map(char *filename, t_map_info *map_info)
 		while (++w < map_info->width)
 		{
 			populate_pixel_matrix(&map[h][w], splitted_line[w], h, w);
-			set_min_and_max_z(map[h][w].z_axis, map_info);
+			refresh_min_and_max_z(map[h][w].z_axis, map_info);
 		}
 		ft_free_str_array(splitted_line);
 	}

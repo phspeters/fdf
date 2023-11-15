@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/15 10:46:45 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:35:23 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	main(int argc, char **argv)
 	if (!fdf.image || (mlx_image_to_window(fdf.window, fdf.image, 0,
 				0) < 0))
 		return (EXIT_FAILURE);
-	init_camera_params(&fdf);
 	init_projections(&fdf);
-	draw_map(&fdf, fdf.map_info.height, fdf.map_info.width);
+	draw_map(fdf.current_map, fdf.map_info, &fdf);
 	mlx_loop_hook(fdf.window, generic_key_hook, &fdf);
 	mlx_loop(fdf.window);
 	mlx_terminate(fdf.window);
