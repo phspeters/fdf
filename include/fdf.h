@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 22:32:29 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:12:41 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_fdf fdf);
 void				put_valid_pixel(mlx_image_t *img, int x, int y,
 						uint32_t color);
 void				move_coordinate(int *coordinate, int direction);
-void				init_camera(t_fdf *fdf);
+void				init_camera_params(t_fdf *fdf);
 // temp
 void				print_map(t_pixel **pixels, int height, int width);
 void				map_to_iso(t_pixel **pixels, int height, int width);

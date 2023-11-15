@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 22:36:59 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:25:01 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	draw_line_bresenham(t_pixel start, t_pixel end, t_fdf *fdf)
 }
 
 //escolher mapa baseado na projeção
+//criar membro de t_map * para segurar o current map e usar como parametro
 void	draw_map(t_fdf *fdf, int height, int width)
 {
 	int	h;

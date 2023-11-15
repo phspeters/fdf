@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 20:43:53 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:53:57 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_pixel	apply_proportion(t_pixel pixel, float proportion)
 	return (spaced_pixel);
 }
 
+//adicionar zoom além do offset
+//usar t_camera como parametro
 t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_fdf fdf)
 {
 	t_line_info	line_info;
@@ -46,18 +48,4 @@ t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_fdf fdf)
 	line_info.x2 = end.x_axis + fdf.camera.x_offset;
 	line_info.y2 = end.y_axis + fdf.camera.y_offset;
 	return (line_info);
-}
-
-t_pixel	to_isometric(t_pixel pixel)
-{
-	t_pixel	new_pixel;
-	float	angle;
-
-	angle = 30 * (M_PI / 180);
-	new_pixel.x_axis = (pixel.x_axis - pixel.y_axis) * cos(angle);
-	new_pixel.y_axis = (pixel.x_axis + pixel.y_axis) * sin(angle)
-		- (pixel.z_axis);
-	new_pixel.z_axis = pixel.z_axis;
-	new_pixel.rgba_channel = pixel.rgba_channel;
-	return (new_pixel);
 }

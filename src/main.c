@@ -6,12 +6,12 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/14 22:37:43 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:46:45 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-// ler o mapa e guardar no parallel, iniciar
+
 int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	if (!fdf.image || (mlx_image_to_window(fdf.window, fdf.image, 0,
 				0) < 0))
 		return (EXIT_FAILURE);
-	init_camera(&fdf);
+	init_camera_params(&fdf);
 	init_projections(&fdf);
 	draw_map(&fdf, fdf.map_info.height, fdf.map_info.width);
 	mlx_loop_hook(fdf.window, generic_key_hook, &fdf);
