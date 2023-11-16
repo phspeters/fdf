@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:02:20 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/15 18:21:42 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:08:48 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_map_proportion(t_map_info map_info)
 	return (proportion);
 }
 
-void	init_camera_params(t_fdf *fdf)
+void	init_camera_and_map_params(t_fdf *fdf)
 {
 	fdf->camera.proportion = get_map_proportion(fdf->map_info);
 	fdf->camera.x_offset = WIDTH / 2;
@@ -32,6 +32,9 @@ void	init_camera_params(t_fdf *fdf)
 	fdf->camera.zoom = 1;
 	fdf->map_info.x_offset = fdf->map_info.width / 2.0;
 	fdf->map_info.y_offset = fdf->map_info.height / 2.0;
+	fdf->map_info.x_angle = 0;
+	fdf->map_info.y_angle = 0;
+	fdf->map_info.z_angle = 0;
 }
 
 void	apply_proportion(t_pixel *pixel, float proportion)
@@ -41,11 +44,11 @@ void	apply_proportion(t_pixel *pixel, float proportion)
 	pixel->z_axis = pixel->z_axis * proportion;
 }
 
-void	centralize_pixel(t_pixel *pixels, t_map_info map_info)
+void	centralize_pixel(t_pixel *pixel, t_map_info map_info)
 {
-	pixels->x_axis = pixels->x_axis - map_info.x_offset;
-	pixels->y_axis = pixels->y_axis - map_info.y_offset;
-	pixels->z_axis = pixels->z_axis - ((map_info.max_z - map_info.min_z) / 2.0);
+	pixel->x_axis = pixel->x_axis - map_info.x_offset;
+	pixel->y_axis = pixel->y_axis - map_info.y_offset;
+	pixel->z_axis = pixel->z_axis - ((map_info.max_z - map_info.min_z) / 2.0);
 }
 
 void	apply_camera_params(t_map *map, t_map_info map_info, t_camera camera)

@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/15 17:51:29 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:11:04 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static char	**get_coordinates_from_line(int fd)
 
 static uint32_t	get_color(char *coordinate)
 {
-	char		*x_address;
+	char		*comma_address;
 	char		*hexadecimal;
 	uint32_t	color;
 
-	x_address = ft_strchr(coordinate, ',');
-	if (x_address)
+	comma_address = ft_strchr(coordinate, ',');
+	if (comma_address)
 	{
-		hexadecimal = ft_strtolower(x_address + 3);
+		hexadecimal = ft_strtolower(comma_address + 3);
 		color = (ft_atoi_base(hexadecimal, "0123456789abcdef") << 8) | 0xff;
 		return (color);
 	}

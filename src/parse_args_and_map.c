@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/15 18:17:47 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:30:11 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static unsigned int	get_height_and_check_width(int fd, unsigned int map_width)
 		if (width != map_width)
 		{
 			free(line);
+			ft_get_next_line(-fd);
 			return (0);
 		}
 		width = 0;

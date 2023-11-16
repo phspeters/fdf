@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/15 17:48:37 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:52:02 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ typedef struct s_map_info
 	unsigned int	width;
 	float			x_offset;
 	float			y_offset;
+	float			x_angle;
+	float			y_angle;
+	float			z_angle;
 	int				max_z;
 	int				min_z;
 }					t_map_info;
@@ -98,11 +101,15 @@ t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_camera camera);
 void				put_valid_pixel(mlx_image_t *img, int x, int y,
 						uint32_t color);
 void				move_coordinate(int *coordinate, int direction);
-void				init_camera_params(t_fdf *fdf);
+void				init_camera_and_map_params(t_fdf *fdf);
 void				apply_camera_params(t_map *map, t_map_info map_info,
 						t_camera camera);
 void				init_projections(t_fdf *fdf);
 void				refresh_corner_pixels(t_pixel pixel, t_map *map);
+void				rotate_around_x_axis(t_pixel *pixel, float angle);
+void				rotate_around_y_axis(t_pixel *pixel, float angle);
+void				rotate_around_z_axis(t_pixel *pixel, float angle);
+void				to_oblique(t_pixel *pixel);
 // temp
 void				print_map(t_pixel **pixels, int height, int width);
 void				map_to_iso(t_pixel **pixels, int height, int width);

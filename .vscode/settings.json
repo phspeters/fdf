@@ -3,4 +3,8 @@
 	"[c]": {
 		"editor.defaultFormatter": "keyhr.42-c-format"
 	},
+	"files.associations": {
+		"*.c": "c",
+		"numbers": "c"
+	},
 }

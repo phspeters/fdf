@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:21:33 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/15 18:34:38 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:54:29 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,8 @@ void	init_map(t_pixel ***map, t_fdf fdf)
 
 void	to_isometric(t_pixel *pixel)
 {
-	float	angle;
-
-	angle = 30 * (M_PI / 180);
-	pixel->x_axis = (pixel->x_axis - pixel->y_axis) * cos(angle);
-	pixel->y_axis = (pixel->x_axis + pixel->y_axis) * sin(angle)
-		- (pixel->z_axis);
+	rotate_around_z_axis(pixel, -45);
+	rotate_around_x_axis(pixel, 54);
 }
 
 void	set_initial_zoom(t_map *map, float *zoom)
@@ -74,7 +70,7 @@ void	transform_map(t_map *map, t_fdf *fdf, void (*func)(t_pixel *))
 
 void	init_projections(t_fdf *fdf)
 {
-	init_camera_params(fdf);
+	init_camera_and_map_params(fdf);
 	apply_camera_params(&fdf->parallel, fdf->map_info, fdf->camera);
 	init_map(&fdf->isometric.pixels, *fdf);
 	transform_map(&fdf->isometric, fdf, to_isometric);
