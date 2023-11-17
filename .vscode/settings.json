@@ -5,6 +5,8 @@
 	},
 	"files.associations": {
 		"*.c": "c",
-		"numbers": "c"
+		"numbers": "c",
+		"map": "c",
+		"format": "c"
 	},
 }

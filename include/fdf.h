@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/16 17:52:02 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:14:18 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,12 @@ typedef struct s_map_info
 typedef struct s_map
 {
 	t_pixel			**pixels;
-	int				x_max;
-	int				x_min;
-	int				y_max;
-	int				y_min;
+	float			x_max;
+	float			x_min;
+	float			y_max;
+	float			y_min;
+	int				x_offset;
+	int				y_offset;
 }					t_map;
 
 typedef struct s_fdf
@@ -97,7 +99,7 @@ void				draw_line_bresenham(t_pixel start, t_pixel end, t_fdf *fdf);
 void				generic_key_hook(void *param);
 void				to_isometric(t_pixel *pixel);
 void				apply_proportion(t_pixel *pixel, float proportion);
-t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_camera camera);
+t_line_info			get_x_and_y(t_pixel start, t_pixel end, t_camera camera, t_map map);
 void				put_valid_pixel(mlx_image_t *img, int x, int y,
 						uint32_t color);
 void				move_coordinate(int *coordinate, int direction);
@@ -110,6 +112,7 @@ void				rotate_around_x_axis(t_pixel *pixel, float angle);
 void				rotate_around_y_axis(t_pixel *pixel, float angle);
 void				rotate_around_z_axis(t_pixel *pixel, float angle);
 void				to_oblique(t_pixel *pixel);
+void				to_isometric(t_pixel *pixel);
 // temp
 void				print_map(t_pixel **pixels, int height, int width);
 void				map_to_iso(t_pixel **pixels, int height, int width);
