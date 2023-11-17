@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/16 16:30:11 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:50:46 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@
 static unsigned int	get_width(char *line)
 {
 	unsigned int	width;
-	char			**splitted_line;
+	int				i;
+	int				new_word;
 
 	width = 0;
-	if (line)
+	i = 0;
+	new_word = 1;
+	while (line[i] && line[i] != '\n')
 	{
-		splitted_line = ft_split(line, ' ');
-		while (splitted_line[width])
-			width++;
-		if (!ft_isprint(*splitted_line[width - 1]))
+		if (line[i] != ' ' && new_word == 1)
 		{
-			ft_free_ptr_array((void **)splitted_line, width);
-			--width;
+			width++;
+			new_word = 0;
 		}
-		else
-			ft_free_ptr_array((void **)splitted_line, width);
+		if (line[i] == ' ')
+			new_word = 1;
+		i++;
 	}
 	return (width);
 }

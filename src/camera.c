@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:02:20 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/16 19:57:58 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:31:07 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ void	apply_proportion(t_pixel *pixel, float proportion)
 	pixel->z_axis = pixel->z_axis * proportion;
 }
 
+//pensar se precisa centralizar o Z
 void	centralize_pixel(t_pixel *pixel, t_map_info map_info)
 {
 	pixel->x_axis = pixel->x_axis - map_info.x_offset;
 	pixel->y_axis = pixel->y_axis - map_info.y_offset;
-	pixel->z_axis = pixel->z_axis - ((map_info.max_z - map_info.min_z) / 2.0);
+	pixel->z_axis = pixel->z_axis - ((map_info.max_z - map_info.min_z) / 2);
 }
 
-void	apply_camera_params(t_map *map, t_map_info map_info, t_camera camera)
+void	apply_camera_params(t_map *map, t_map_info map_info, t_camera cam)
 {
 	unsigned int	h;
 	unsigned int	w;
@@ -63,7 +64,7 @@ void	apply_camera_params(t_map *map, t_map_info map_info, t_camera camera)
 		while (++w < map_info.width)
 		{
 			centralize_pixel(&map->pixels[h][w], map_info);
-			apply_proportion(&map->pixels[h][w], camera.proportion);
+			apply_proportion(&map->pixels[h][w], cam.proportion);
 		}
 	}
 }

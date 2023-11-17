@@ -6,17 +6,17 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/16 20:14:54 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:56:30 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_line_info	set_line_info(t_pixel start, t_pixel end, t_camera camera, t_map *map)
+t_line_info	set_line_info(t_pixel start, t_pixel end, t_camera cam, t_map *map)
 {
 	t_line_info	line_info;
 
-	line_info = get_x_and_y(start, end, camera, *map);
+	line_info = get_x_and_y(start, end, cam, *map);
 	line_info.dx = line_info.x2 - line_info.x1;
 	line_info.dy = line_info.y2 - line_info.y1;
 	line_info.abs_dx = abs(line_info.dx);
