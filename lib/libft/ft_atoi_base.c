@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pehenri2 <pehenri2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:39:56 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/10/26 15:12:54 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:02:37 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,18 @@ static int	check_base_and_get_length(char *base)
 	return (base_len);
 }
 
-static int	is_number_in_base(char *str, char *base)
+static int	is_number_in_base(char c, char *base)
 {
 	int	i;
-	int	j;
-	int	start;
 
-	start = 0;
-	while (str[start] != '\0' && ft_isspace(str[start]))
-		start++;
-	if (ft_issign(str[start]))
-		start++;
-	i = start;
-	while (str[i])
+	i = 0;
+	while (base[i])
 	{
-		j = 0;
-		while (base[j] && (str[i] != base[j]))
-			++j;
-		if (str[i] != base[j] && !ft_issign(str[i]))
-			return (0);
+		if (c == base[i])
+			return (1);
 		i++;
 	}
-	if (i == 0)
-		return (0);
-	return (1);
+	return (0);
 }
 
 static int	get_sign(char c)
@@ -90,7 +78,7 @@ int	ft_atoi_base(char *str, char *base)
 
 	sign = 1;
 	base_length = check_base_and_get_length(base);
-	if ((base_length == 0) || !is_number_in_base(str, base))
+	if (base_length == 0)
 		return (0);
 	start = 0;
 	while (str[start] != '\0' && ft_isspace(str[start]))
@@ -98,7 +86,7 @@ int	ft_atoi_base(char *str, char *base)
 	sign = get_sign(str[start]);
 	i = start;
 	result = 0;
-	while (str[i])
+	while (str[i] && is_number_in_base(str[i], base))
 	{
 		result = (result * base_length) + (get_number(str[i], base));
 		i++;
