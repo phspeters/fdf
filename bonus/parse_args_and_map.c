@@ -6,32 +6,31 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 12:20:46 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/19 20:09:35 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-
-// tratar os errors com errno e tals
+#include "fdf_bonus.h"
 
 static unsigned int	get_width(char *line)
 {
 	unsigned int	width;
-	char			**splitted_line;
+	int				i;
+	int				new_word;
 
 	width = 0;
-	if (line)
+	i = 0;
+	new_word = 1;
+	while (line[i] && line[i] != '\n')
 	{
-		splitted_line = ft_split(line, ' ');
-		while (splitted_line[width])
-			width++;
-		if (!ft_isprint(*splitted_line[width - 1]))
+		if (line[i] != ' ' && new_word == 1)
 		{
-			ft_free_ptr_array((void **)splitted_line, width);
-			--width;
+			width++;
+			new_word = 0;
 		}
-		else
-			ft_free_ptr_array((void **)splitted_line, width);
+		if (line[i] == ' ')
+			new_word = 1;
+		i++;
 	}
 	return (width);
 }
@@ -52,6 +51,7 @@ static unsigned int	get_height_and_check_width(int fd, unsigned int map_width)
 		if (width != map_width)
 		{
 			free(line);
+			ft_get_next_line(-fd);
 			return (0);
 		}
 		width = 0;
@@ -62,7 +62,7 @@ static unsigned int	get_height_and_check_width(int fd, unsigned int map_width)
 	return (height);
 }
 
-int	parse_args_and_map(int argc, char **argv, t_master *master)
+int	parse_args_and_map(int argc, char **argv, t_fdf *fdf)
 {
 	int		fd;
 	char	*line;
@@ -73,11 +73,13 @@ int	parse_args_and_map(int argc, char **argv, t_master *master)
 	if (fd < 0)
 		return (ft_printf("Invalid filename"));
 	line = ft_get_next_line(fd);
-	master->map_width = get_width(line);
-	master->map_height = get_height_and_check_width(fd, master->map_width);
+	fdf->map_info.width = get_width(line);
+	fdf->map_info.height = get_height_and_check_width(fd, fdf->map_info.width);
 	close(fd);
 	free(line);
-	if (master->map_height < 3 || master->map_width < 3)
+	fdf->map_info.max_z = INT_MIN;
+	fdf->map_info.min_z = INT_MAX;
+	if (fdf->map_info.height < 3 || fdf->map_info.width < 3)
 		return (EXIT_FAILURE);
 	else
 		return (EXIT_SUCCESS);

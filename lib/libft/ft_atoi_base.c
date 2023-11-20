@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:39:56 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 18:02:37 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:39:40 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	get_sign(char c)
 	return (1);
 }
 
-static int	get_number(char c, char *base)
+static int	get_decimal_value(char c, char *base)
 {
 	int	i;
 
@@ -88,7 +88,7 @@ int	ft_atoi_base(char *str, char *base)
 	result = 0;
 	while (str[i] && is_number_in_base(str[i], base))
 	{
-		result = (result * base_length) + (get_number(str[i], base));
+		result = (result * base_length) + (get_decimal_value(str[i], base));
 		i++;
 	}
 	return (result * sign);

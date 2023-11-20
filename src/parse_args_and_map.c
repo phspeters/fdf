@@ -6,15 +6,11 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 14:50:46 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:02:41 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-//testar saida do programa com mapa invalido
-//cuidar com leak da GNL
-// tratar os errors com errno e tals
 
 static unsigned int	get_width(char *line)
 {

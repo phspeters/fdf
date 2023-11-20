@@ -6,33 +6,30 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/08 12:20:49 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/19 20:09:16 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-static char	**get_line_of_coordinates(int fd)
+void	refresh_min_and_max_z(int z_axis, t_map_info *map_info)
 {
-	char	*line;
-	char	**coordinates;
-
-	line = ft_get_next_line(fd);
-	coordinates = ft_split(line, ' ');
-	free(line);
-	return (coordinates);
+	if (z_axis > map_info->max_z)
+		map_info->max_z = z_axis;
+	if (z_axis < map_info->min_z)
+		map_info->min_z = z_axis;
 }
 
 static uint32_t	get_color(char *coordinate)
 {
-	char		*x_address;
+	char		*comma_address;
 	char		*hexadecimal;
 	uint32_t	color;
 
-	x_address = ft_strchr(coordinate, ',');
-	if (x_address)
+	comma_address = ft_strchr(coordinate, ',');
+	if (comma_address)
 	{
-		hexadecimal = ft_strtolower(x_address + 3);
+		hexadecimal = ft_strtolower(comma_address + 3);
 		color = (ft_atoi_base(hexadecimal, "0123456789abcdef") << 8) | 0xff;
 		return (color);
 	}
@@ -47,30 +44,42 @@ static void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 	pixel->rgba_channel = get_color(str);
 }
 
-t_pixel	**read_map(char *filename, int width, int height)
+static char	**get_coordinates_from_line(int fd)
 {
-	t_pixel	**pixels;
-	int		h;
-	int		w;
-	int		fd;
-	char	**splitted_line;
+	char	*line;
+	char	**coordinates;
+
+	line = ft_get_next_line(fd);
+	coordinates = ft_split(line, ' ');
+	free(line);
+	return (coordinates);
+}
+
+t_pixel	**read_map(char *filename, t_map_info *map_info)
+{
+	t_pixel			**map;
+	unsigned int	h;
+	unsigned int	w;
+	int				fd;
+	char			**splitted_line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	pixels = malloc(height * sizeof(t_pixel *));
-	splitted_line = NULL;
+	map = malloc(map_info->height * sizeof(t_pixel *));
 	h = -1;
-	while (++h < height)
+	while (++h < map_info->height)
 	{
-		pixels[h] = malloc(width * sizeof(t_pixel));
-		ft_free_str_array(splitted_line);
-		splitted_line = get_line_of_coordinates(fd);
+		map[h] = malloc(map_info->width * sizeof(t_pixel));
+		splitted_line = get_coordinates_from_line(fd);
 		w = -1;
-		while (++w < width)
-			populate_pixel_matrix(&pixels[h][w], splitted_line[w], h, w);
+		while (++w < map_info->width)
+		{
+			populate_pixel_matrix(&map[h][w], splitted_line[w], h, w);
+			refresh_min_and_max_z(map[h][w].z_axis, map_info);
+		}
+		ft_free_str_array(splitted_line);
 	}
-	ft_free_str_array(splitted_line);
 	close(fd);
-	return (pixels);
+	return (map);
 }

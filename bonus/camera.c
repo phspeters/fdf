@@ -6,11 +6,11 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:02:20 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 19:01:11 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/19 21:28:41 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int	get_map_proportion(t_map_info map_info)
 {
@@ -33,15 +33,16 @@ void	init_camera_and_map_params(t_fdf *fdf)
 	fdf->camera.x_angle = 0;
 	fdf->camera.y_angle = 0;
 	fdf->camera.z_angle = 0;
+	fdf->camera.z_scale = 1;
 	fdf->map_info.x_offset = fdf->map_info.width / 2.0;
 	fdf->map_info.y_offset = fdf->map_info.height / 2.0;
 }
 
-void	apply_proportion(t_pixel *pixel, float proportion)
+void	apply_proportion(t_pixel *pixel, t_camera cam)
 {
-	pixel->x_axis = pixel->x_axis * proportion;
-	pixel->y_axis = pixel->y_axis * proportion;
-	pixel->z_axis = pixel->z_axis * proportion;
+	pixel->x_axis = pixel->x_axis * cam.proportion;
+	pixel->y_axis = pixel->y_axis * cam.proportion;
+	pixel->z_axis = pixel->z_axis * cam.proportion * cam.z_scale;
 }
 
 void	centralize_pixel(t_pixel *pixel, t_map_info map_info)
@@ -63,7 +64,7 @@ void	apply_camera_params(t_map *map, t_map_info map_info, t_camera cam)
 		while (++w < map_info.width)
 		{
 			centralize_pixel(&map->pixels[h][w], map_info);
-			apply_proportion(&map->pixels[h][w], cam.proportion);
+			apply_proportion(&map->pixels[h][w], cam);
 		}
 	}
 }

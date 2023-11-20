@@ -6,21 +6,18 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 14:30:05 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:50:20 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static char	**get_coordinates_from_line(int fd)
+void	refresh_min_and_max_z(int z_axis, t_map_info *map_info)
 {
-	char	*line;
-	char	**coordinates;
-
-	line = ft_get_next_line(fd);
-	coordinates = ft_split(line, ' ');
-	free(line);
-	return (coordinates);
+	if (z_axis > map_info->max_z)
+		map_info->max_z = z_axis;
+	if (z_axis < map_info->min_z)
+		map_info->min_z = z_axis;
 }
 
 static uint32_t	get_color(char *coordinate)
@@ -47,15 +44,17 @@ static void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 	pixel->rgba_channel = get_color(str);
 }
 
-void	refresh_min_and_max_z(int z_axis, t_map_info *map_info)
+static char	**get_coordinates_from_line(int fd)
 {
-	if (z_axis > map_info->max_z)
-		map_info->max_z = z_axis;
-	if (z_axis < map_info->min_z)
-		map_info->min_z = z_axis;
+	char	*line;
+	char	**coordinates;
+
+	line = ft_get_next_line(fd);
+	coordinates = ft_split(line, ' ');
+	free(line);
+	return (coordinates);
 }
 
-//checar se não está tendo leak após mudanças
 t_pixel	**read_map(char *filename, t_map_info *map_info)
 {
 	t_pixel			**map;

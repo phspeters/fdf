@@ -6,7 +6,7 @@
 #    By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 16:51:34 by pehenri2          #+#    #+#              #
-#    Updated: 2023/11/15 15:45:33 by pehenri2         ###   ########.fr        #
+#    Updated: 2023/11/19 21:37:12 by pehenri2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILES = ft_isalpha.c			ft_isdigit.c			ft_isalnum.c			ft_isascii.c			ft_isprint.c
 																															\
 		ft_isspace.c    		ft_issign.c				ft_putnbr_base_fd.c		ft_count_words.c		ft_nbrlen.c			\
 		ft_putptr_fd.c			ft_free_ptr_array.c		ft_free_str_array.c		ft_strtoupper.c			ft_strtolower.c		\
-		ft_atoi_base.c			ft_free_str.c																							\
+		ft_atoi_base.c			ft_free_str.c			fd_fprintf.c																				\
 																															\
 		ft_get_next_line.c		ft_printf.c
 OBJ = $(FILES:.c=.o)
@@ -36,8 +36,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 
 %.o: %.c
-	$(CC) $(FLAGS) -I . -c $< -o $@
-	ar rcs $(NAME) $@
+	@$(CC) $(FLAGS) -I . -c $< -o $@ && printf "Compiling: $(notdir $<\n)
+	@ar rcs $(NAME) $@
 
 clean:
 	rm -f $(OBJ)

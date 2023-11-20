@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projections.c                                      :+:      :+:    :+:   */
+/*   projections_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:21:33 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 19:03:41 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/19 19:50:53 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	set_map_offset_correction(t_map *map)
 {
@@ -80,5 +80,7 @@ void	init_projections(t_fdf *fdf)
 	apply_camera_params(&fdf->parallel, fdf->map_info, fdf->camera);
 	init_map(&fdf->isometric, *fdf);
 	transform_map(&fdf->isometric, fdf, to_isometric);
+	init_map(&fdf->oblique, *fdf);
+	transform_map(&fdf->oblique, fdf, to_oblique);
 	fdf->current_map = &fdf->isometric;
 }

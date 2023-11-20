@@ -6,47 +6,17 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 14:31:51 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/19 19:56:46 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	generic_key_hook(void *param)
+void	close_key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_fdf	*fdf;
 
 	fdf = param;
-	if (mlx_is_key_down(fdf->window, MLX_KEY_ESCAPE))
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(fdf->window);
-	mlx_delete_image(fdf->window, fdf->image);
-	fdf->image = mlx_new_image(fdf->window, WIDTH, HEIGHT);
-	mlx_image_to_window(fdf->window, fdf->image, 0, 0);
-	draw_map(fdf->current_map, fdf->map_info, fdf);
 }
-
-//void	generic_key_hook(void *param)
-//{
-//	t_fdf	*fdf;
-
-//	fdf = param;
-//	if (mlx_is_key_down(fdf->window, MLX_KEY_ESCAPE))
-//		mlx_close_window(fdf->window);
-//	//bonus
-//	if (mlx_is_key_down(fdf->window, MLX_KEY_W))
-//		fdf->camera.y_offset -= 10;
-//	if (mlx_is_key_down(fdf->window, MLX_KEY_S))
-//		fdf->camera.y_offset += 10;
-//	if (mlx_is_key_down(fdf->window, MLX_KEY_A))
-//		fdf->camera.x_offset -= 10;
-//	if (mlx_is_key_down(fdf->window, MLX_KEY_D))
-//		fdf->camera.x_offset += 10;
-//	if (mlx_is_key_down(fdf->window, MLX_KEY_Q))
-//		fdf->camera.zoom *= 0.9;
-//	if (mlx_is_key_down(fdf->window, MLX_KEY_E))
-//		fdf->camera.zoom *= 1.1;
-//	mlx_delete_image(fdf->window, fdf->image);
-//	fdf->image = mlx_new_image(fdf->window, WIDTH, HEIGHT);
-//	mlx_image_to_window(fdf->window, fdf->image, 0, 0);
-//	draw_map(fdf->current_map, fdf->map_info, fdf);
-//}

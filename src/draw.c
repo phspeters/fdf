@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 14:56:30 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:51:35 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	draw_line_closer_to_x_axis(t_line_info line_info, mlx_image_t *image)
 	}
 }
 
-//testar deixar uma função só e inverter o começo e o fim?
 void	draw_line_bresenham(t_pixel start, t_pixel end, t_fdf *fdf)
 {
 	t_line_info	line_info;
