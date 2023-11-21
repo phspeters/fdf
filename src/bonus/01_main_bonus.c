@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1_main_bonus.c                                     :+:      :+:    :+:   */
+/*   01_main_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 12:39:33 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:50:15 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	action_hooks(void *param)
 
 	fdf = param;
 	mlx_loop_hook(fdf->window, close_loop_hook, fdf);
+	mlx_loop_hook(fdf->window, randomize_background_color_loop_hook, fdf);
 	mlx_loop_hook(fdf->window, select_projection_loop_hook, fdf);
 	mlx_loop_hook(fdf->window, reset_position_loop_hook, fdf);
 	mlx_loop_hook(fdf->window, translate_loop_hook, fdf);

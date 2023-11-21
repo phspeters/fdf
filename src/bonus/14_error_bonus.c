@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   6_transformation_bonus.c                           :+:      :+:    :+:   */
+/*   14_error_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 19:28:11 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 13:32:29 by pehenri2         ###   ########.fr       */
+/*   Created: 2023/11/20 19:53:03 by pehenri2          #+#    #+#             */
+/*   Updated: 2023/11/21 17:50:44 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-void	to_isometric(t_pixel *pixel)
+void	handle_mlx_error(t_fdf *fdf)
 {
-	rotate_around_z_axis(pixel, -45);
-	rotate_around_x_axis(pixel, 54);
+	free_maps(fdf);
+	ft_fprintf(STDERR_FILENO, "%s\n", mlx_strerror(mlx_errno));
+	exit(mlx_errno);
 }
 
-void	to_oblique(t_pixel *pixel)
+void	handle_error(char *message)
 {
-	float	x;
-	float	y;
-	float	angle;
-
-	angle = 45 * M_PI / 180;
-	x = pixel->x_axis;
-	y = pixel->y_axis;
-	pixel->x_axis = x + (pixel->z_axis * sin(angle));
-	pixel->y_axis = y - (pixel->z_axis * sin(angle));
-}
-
-void	to_parallel(t_pixel *pixel)
-{
-	pixel->x_axis = pixel->x_axis;
+	if (errno)
+	{
+		perror(message);
+		exit(errno);
+	}
+	else
+	{
+		ft_fprintf(STDERR_FILENO, "%s\n", message);
+		exit(EXIT_FAILURE);
+	}
 }

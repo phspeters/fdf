@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   14_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 16:07:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/19 19:56:46 by pehenri2         ###   ########.fr       */
+/*   Created: 2023/11/20 19:53:03 by pehenri2          #+#    #+#             */
+/*   Updated: 2023/11/21 17:11:31 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	close_key_hook(mlx_key_data_t keydata, void *param)
+void	handle_mlx_error(t_fdf *fdf)
 {
-	t_fdf	*fdf;
+	free_maps(fdf);
+	ft_fprintf(STDERR_FILENO, "%s\n", mlx_strerror(mlx_errno));
+	exit(mlx_errno);
+}
 
-	fdf = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
-		mlx_close_window(fdf->window);
+void	handle_error(char *message)
+{
+	if (errno)
+	{
+		perror(message);
+		exit(errno);
+	}
+	else
+	{
+		ft_fprintf(STDERR_FILENO, "%s\n", message);
+		exit(EXIT_FAILURE);
+	}
 }

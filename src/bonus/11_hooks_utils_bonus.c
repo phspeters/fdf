@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   10_hooks_utils_bonus.c                             :+:      :+:    :+:   */
+/*   11_hooks_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:49:37 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:50:36 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,18 @@ void	reset_position_loop_hook(void *param)
 		fdf->camera.z_angle = 0;
 		fdf->camera.x_offset = WIDTH / 2;
 		fdf->camera.y_offset = HEIGHT / 2;
+		fdf->map_info.background_color = 0x000000FF;
 		set_initial_zoom(fdf->current_map, &fdf->camera.zoom);
 	}
+}
+
+void	randomize_background_color_loop_hook(void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = param;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_R))
+		fdf->map_info.background_color = rand();
 }
 
 void	close_loop_hook(void *param)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*   13_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 18:10:47 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:17:49 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ void	refresh_corner_pixels(t_pixel pixel, t_map *map)
 		map->y_min = pixel.y_axis;
 }
 
-t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_camera camera, t_map map)
+void	refresh_min_and_max_z(int z_axis, t_map_info *map_info)
 {
-	t_line_info	line_info;
+	if (z_axis > map_info->max_z)
+		map_info->max_z = z_axis;
+	if (z_axis < map_info->min_z)
+		map_info->min_z = z_axis;
+}
 
-	line_info.x1 = ((start.x_axis - map.x_offset_correction) * camera.zoom)
-		+ camera.x_offset;
-	line_info.y1 = ((start.y_axis - map.y_offset_correction) * camera.zoom)
-		+ camera.y_offset;
-	line_info.x2 = ((end.x_axis - map.x_offset_correction) * camera.zoom)
-		+ camera.x_offset;
-	line_info.y2 = ((end.y_axis - map.y_offset_correction) * camera.zoom)
-		+ camera.y_offset;
-	return (line_info);
+void	free_maps(t_fdf *fdf)
+{
+	ft_free_ptr_array((void **)fdf->parallel.pixels, fdf->map_info.height);
+	ft_free_ptr_array((void **)fdf->isometric.pixels, fdf->map_info.height);
 }

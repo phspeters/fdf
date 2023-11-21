@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   8_draw_line.c                                      :+:      :+:    :+:   */
+/*   08_draw_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 14:32:19 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:21:06 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 void	draw_line(t_pixel start, t_pixel end, t_fdf *fdf)
 {
@@ -42,8 +42,6 @@ t_line_info	get_line_coordinates(t_pixel start, t_pixel end, t_camera camera,
 {
 	t_line_info	line_info;
 
-	rotate_pixel(&start, camera);
-	rotate_pixel(&end, camera);
 	start.x_axis = ((start.x_axis - map.x_offset_correction) * camera.zoom)
 		+ camera.x_offset;
 	start.y_axis = ((start.y_axis - map.y_offset_correction) * camera.zoom)
@@ -78,7 +76,8 @@ void	draw_line_closer_to_x_axis(t_line_info line_info, mlx_image_t *image)
 			decision = decision + (2 * line_info.abs_dy - 2 * line_info.abs_dx);
 		}
 		put_valid_pixel(image, line_info.x1, line_info.y1,
-			line_info.start_color);
+			interpolate_color(line_info.start_color, line_info.end_color,
+				(float)i / line_info.abs_dx));
 		i++;
 	}
 }
@@ -102,7 +101,8 @@ void	draw_line_closer_to_y_axis(t_line_info line_info, mlx_image_t *image)
 			decision = decision + (2 * line_info.abs_dx - 2 * line_info.abs_dy);
 		}
 		put_valid_pixel(image, line_info.x1, line_info.y1,
-			line_info.start_color);
+			interpolate_color(line_info.start_color, line_info.end_color,
+				(float)i / line_info.abs_dy));
 		i++;
 	}
 }
