@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/19 21:07:48 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:53:13 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,8 @@ void	refresh_corner_pixels(t_pixel pixel, t_map *map)
 		map->y_min = pixel.y_axis;
 }
 
-t_line_info	get_x_and_y(t_pixel start, t_pixel end, t_camera camera, t_map map)
+void	free_maps(t_fdf *fdf)
 {
-	t_line_info	line_info;
-
-	rotate_around_x_axis(&start, camera.x_angle);
-	rotate_around_y_axis(&start, camera.y_angle);
-	rotate_around_y_axis(&start, camera.y_angle);
-	rotate_around_x_axis(&end, camera.x_angle);
-	rotate_around_y_axis(&end, camera.y_angle);
-	rotate_around_y_axis(&end, camera.y_angle);
-	line_info.x1 = ((start.x_axis - map.x_offset_correction) * camera.zoom)
-		+ camera.x_offset;
-	line_info.y1 = ((start.y_axis - map.y_offset_correction) * camera.zoom)
-		+ camera.y_offset;
-	line_info.x2 = ((end.x_axis - map.x_offset_correction) * camera.zoom)
-		+ camera.x_offset;
-	line_info.y2 = ((end.y_axis - map.y_offset_correction) * camera.zoom)
-		+ camera.y_offset;
-	return (line_info);
+	ft_free_ptr_array((void **)fdf->parallel.pixels, fdf->map_info.height);
+	ft_free_ptr_array((void **)fdf->isometric.pixels, fdf->map_info.height);
 }

@@ -6,20 +6,20 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/19 21:39:18 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:17:14 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	handle_error(t_fdf *fdf)
-{
-	int	exit_code;
+//void	handle_mlx_error(t_fdf *fdf)
+//{
+//	int	exit_code;
 
-	free_maps(fdf);
-	exit_code = ft_fprintf(STDERR_FILENO, "%s", mlx_strerror(mlx_errno));
-	exit(exit_code);
-}
+//	free_maps(fdf);
+//	exit_code = ft_fprintf(STDERR_FILENO, "%s", mlx_strerror(mlx_errno));
+//	exit(exit_code);
+//}
 
 void	free_maps(t_fdf *fdf)
 {
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	if (!fdf.parallel.pixels)
 		return (EXIT_FAILURE);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	fdf.window = mlx_init(WIDTH, HEIGHT, "pehenri2 - fdf", true);
+	fdf.window = mlx_init(WIDTH, HEIGHT, argv[1], true);
 	if (!fdf.window)
 		return (EXIT_FAILURE);
 	fdf.image = mlx_new_image(fdf.window, WIDTH, HEIGHT);

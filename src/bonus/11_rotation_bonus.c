@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotation _bonus.c                                  :+:      :+:    :+:   */
+/*   11_rotation_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:56:37 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/19 19:44:17 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:50:18 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
+
+void	rotate_pixel(t_pixel *pixel, t_camera cam)
+{
+	rotate_around_x_axis(pixel, cam.x_angle);
+	rotate_around_y_axis(pixel, cam.y_angle);
+	rotate_around_z_axis(pixel, cam.z_angle);
+}
 
 void	rotate_around_x_axis(t_pixel *pixel, float angle)
 {
@@ -46,23 +53,4 @@ void	rotate_around_z_axis(t_pixel *pixel, float angle)
 	y = pixel->y_axis;
 	pixel->x_axis = (x * cos(angle)) - (y * sin(angle));
 	pixel->y_axis = (x * sin(angle)) + (y * cos(angle));
-}
-
-void	to_isometric(t_pixel *pixel)
-{
-	rotate_around_z_axis(pixel, -45);
-	rotate_around_x_axis(pixel, 54);
-}
-
-void	to_oblique(t_pixel *pixel)
-{
-	float	x;
-	float	y;
-	float	angle;
-
-	angle = 45 * M_PI / 180;
-	x = pixel->x_axis;
-	y = pixel->y_axis;
-	pixel->x_axis = x + (pixel->z_axis * sin(angle));
-	pixel->y_axis = y - (pixel->z_axis * sin(angle));
 }

@@ -7,6 +7,7 @@
 		"*.c": "c",
 		"numbers": "c",
 		"map": "c",
-		"format": "c"
+		"format": "c",
+		"fdf_bonus.h": "c"
 	},
 }

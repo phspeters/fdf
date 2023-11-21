@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 11:48:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/19 21:36:17 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/20 11:00:25 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	print_format(const int fd, const char specifier, va_list args)
 		return (0);
 }
 
-int	ft_printf(const int fd, const char *str, ...)
+int	ft_fprintf(const int fd, const char *str, ...)
 {
 	va_list	args;
 	int		counter;
