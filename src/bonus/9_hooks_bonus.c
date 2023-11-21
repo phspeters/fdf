@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 19:41:55 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:48:21 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:32:43 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,23 @@ void	rotate_key_hook(mlx_key_data_t keydata, void *param)
 	t_fdf	*fdf;
 
 	fdf = param;
-	if (keydata.key == MLX_KEY_S && keydata.modifier == MLX_SHIFT && keydata.action == MLX_REPEAT)
+	if (keydata.key == MLX_KEY_S && keydata.modifier == MLX_SHIFT && \
+	keydata.action == MLX_REPEAT)
 		fdf->camera.x_angle -= 2;
-	if (keydata.key == MLX_KEY_W && keydata.modifier == MLX_SHIFT && keydata.action == MLX_REPEAT)
+	if (keydata.key == MLX_KEY_W && keydata.modifier == MLX_SHIFT && \
+	keydata.action == MLX_REPEAT)
 		fdf->camera.x_angle += 2;
-	if (keydata.key == MLX_KEY_A && keydata.modifier == MLX_SHIFT && keydata.action == MLX_REPEAT)
+	if (keydata.key == MLX_KEY_A && keydata.modifier == MLX_SHIFT && \
+	keydata.action == MLX_REPEAT)
 		fdf->camera.y_angle -= 2;
-	if (keydata.key == MLX_KEY_D && keydata.modifier == MLX_SHIFT && keydata.action == MLX_REPEAT)
+	if (keydata.key == MLX_KEY_D && keydata.modifier == MLX_SHIFT && \
+	keydata.action == MLX_REPEAT)
 		fdf->camera.y_angle += 2;
-	if (keydata.key == MLX_KEY_Q && keydata.modifier == MLX_SHIFT && keydata.action == MLX_REPEAT)
+	if (keydata.key == MLX_KEY_Q && keydata.modifier == MLX_SHIFT && \
+	keydata.action == MLX_REPEAT)
 		fdf->camera.z_angle -= 2;
-	if (keydata.key == MLX_KEY_E && keydata.modifier == MLX_SHIFT && keydata.action == MLX_REPEAT)
+	if (keydata.key == MLX_KEY_E && keydata.modifier == MLX_SHIFT && \
+	keydata.action == MLX_REPEAT)
 		fdf->camera.z_angle += 2;
 }
 

@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 21:02:04 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:51:00 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <errno.h>
 # define WIDTH 1600
 # define HEIGHT 900
 # define EXIT_SUCCESS 0
@@ -105,15 +106,17 @@ unsigned int	get_height_and_check_width(int fd, unsigned int map_width);
 
 //3_read_map.c
 t_pixel			**read_map(char *filename, t_map_info *map_info);
+void			populate_line(t_pixel **map, t_map_info *map_info, int fd,
+					int h);
 char			**get_coordinates_from_line(int fd);
 void			populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w);
 uint32_t		get_color(char *coordinate);
-void			refresh_min_and_max_z(int z_axis, t_map_info *map_info);
 
 //4_camera.c
 void			init_camera_and_map_params(t_fdf *fdf);
 int				get_map_proportion(t_map_info map_info);
-void			apply_camera_params(t_map *map, t_map_info map_info, t_camera cam);
+void			apply_camera_params(t_map *map, t_map_info map_info,
+					t_camera cam);
 void			centralize_pixel(t_pixel *pixel, t_map_info map_info);
 void			apply_proportion(t_pixel *pixel, t_camera cam);
 
@@ -127,6 +130,7 @@ void			set_map_offset_correction(t_map *map);
 //6_transformation_bonus.c
 void			to_isometric(t_pixel *pixel);
 void			to_oblique(t_pixel *pixel);
+void			to_parallel(t_pixel *pixel);
 
 //7_render_bonus.c
 void			render_image(t_map *map, t_map_info map_info, t_fdf *fdf);
@@ -134,10 +138,14 @@ void			render_background(t_fdf *fdf);
 
 //8_draw_line.c
 void			draw_line(t_pixel start, t_pixel end, t_fdf *fdf);
-t_line_info		set_line_info(t_pixel start, t_pixel end, t_camera cam, t_map *map);
-t_line_info		get_line_coordinates(t_pixel start, t_pixel end, t_camera camera, t_map map);
-void			draw_line_closer_to_x_axis(t_line_info line_info, mlx_image_t *image);
-void			draw_line_closer_to_y_axis(t_line_info line_info, mlx_image_t *image);
+t_line_info		set_line_info(t_pixel start, t_pixel end, t_camera cam,
+					t_map *map);
+t_line_info		get_line_coordinates(t_pixel start, t_pixel end,
+					t_camera camera, t_map map);
+void			draw_line_closer_to_x_axis(t_line_info line_info,
+					mlx_image_t *image);
+void			draw_line_closer_to_y_axis(t_line_info line_info,
+					mlx_image_t *image);
 
 //9_hooks_bonus.c
 void			translate_loop_hook(void *param);
@@ -161,9 +169,11 @@ void			rotate_around_z_axis(t_pixel *pixel, float angle);
 void			put_valid_pixel(mlx_image_t *img, int x, int y, uint32_t color);
 void			move_coordinate(int *coordinate, int direction);
 void			refresh_corner_pixels(t_pixel pixel, t_map *map);
+void			refresh_min_and_max_z(int z_axis, t_map_info *map_info);
 void			free_maps(t_fdf *fdf);
 
 //13_error.c
 void			handle_mlx_error(t_fdf *fdf);
+void			handle_error(char *message);
 
 #endif

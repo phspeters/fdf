@@ -6,7 +6,7 @@
 #    By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 16:51:34 by pehenri2          #+#    #+#              #
-#    Updated: 2023/11/20 11:01:29 by pehenri2         ###   ########.fr        #
+#    Updated: 2023/11/21 13:06:51 by pehenri2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,10 @@ $(NAME): $(OBJ)
 	@ar rcs $(NAME) $@
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

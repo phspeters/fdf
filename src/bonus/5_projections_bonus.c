@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:21:33 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:41:17 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:33:04 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_map_projections(t_fdf *fdf)
 {
+	transform_map(&fdf->parallel, fdf, to_parallel);
 	init_map(&fdf->oblique, *fdf);
 	transform_map(&fdf->oblique, fdf, to_oblique);
 	init_map(&fdf->isometric, *fdf);
@@ -27,10 +28,14 @@ void	init_map(t_map *map, t_fdf fdf)
 	unsigned int	w;
 
 	map->pixels = malloc(fdf.map_info.height * sizeof(t_pixel *));
+	if (!map->pixels)
+		handle_error("Error allocating memory");
 	h = -1;
 	while (++h < fdf.map_info.height)
 	{
 		map->pixels[h] = malloc(fdf.map_info.width * sizeof(t_pixel));
+		if (!map->pixels[h])
+			handle_error("Error allocating memory");
 		w = -1;
 		while (++w < fdf.map_info.width)
 		{

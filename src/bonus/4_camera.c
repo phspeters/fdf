@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:02:20 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:39:10 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:33:09 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ void	init_camera_and_map_params(t_fdf *fdf)
 	fdf->map_info.x_offset = fdf->map_info.width / 2.0;
 	fdf->map_info.y_offset = fdf->map_info.height / 2.0;
 	fdf->map_info.background_color = 0x000000FF;
-	fdf->parallel.x_max = fdf->parallel.pixels[0][fdf->map_info.width - 1].x_axis * fdf->camera.proportion;
-	fdf->parallel.x_min = fdf->parallel.pixels[0][0].x_axis;
-	fdf->parallel.y_max = fdf->parallel.pixels[fdf->map_info.height - 1][0].y_axis * fdf->camera.proportion;
-	fdf->parallel.y_min = fdf->parallel.pixels[0][0].y_axis;
 	fdf->parallel.x_offset_correction = 0;
 	fdf->parallel.y_offset_correction = 0;
 }

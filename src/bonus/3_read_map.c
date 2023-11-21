@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:37:29 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:40:39 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,37 @@ t_pixel	**read_map(char *filename, t_map_info *map_info)
 {
 	t_pixel			**map;
 	unsigned int	h;
-	unsigned int	w;
 	int				fd;
-	char			**splitted_line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
+		handle_error("Error opening file");
 	map = malloc(map_info->height * sizeof(t_pixel *));
+	if (!map)
+		handle_error("Error allocating memory");
 	h = -1;
 	while (++h < map_info->height)
-	{
-		map[h] = malloc(map_info->width * sizeof(t_pixel));
-		splitted_line = get_coordinates_from_line(fd);
-		w = -1;
-		while (++w < map_info->width)
-		{
-			populate_pixel_matrix(&map[h][w], splitted_line[w], h, w);
-			refresh_min_and_max_z(map[h][w].z_axis, map_info);
-		}
-		ft_free_str_array(splitted_line);
-	}
+		populate_line(map, map_info, fd, h);
 	close(fd);
 	return (map);
+}
+
+void	populate_line(t_pixel **map, t_map_info *map_info, int fd, int h)
+{
+	unsigned int	w;
+	char			**splitted_line;
+
+	map[h] = malloc(map_info->width * sizeof(t_pixel));
+	if (!map[h])
+		handle_error("Error allocating memory");
+	splitted_line = get_coordinates_from_line(fd);
+	w = -1;
+	while (++w < map_info->width)
+	{
+		populate_pixel_matrix(&map[h][w], splitted_line[w], h, w);
+		refresh_min_and_max_z(map[h][w].z_axis, map_info);
+	}
+	ft_free_str_array(splitted_line);
 }
 
 char	**get_coordinates_from_line(int fd)
@@ -74,12 +82,4 @@ uint32_t	get_color(char *coordinate)
 		return (color);
 	}
 	return (0xffffffff);
-}
-
-void	refresh_min_and_max_z(int z_axis, t_map_info *map_info)
-{
-	if (z_axis > map_info->max_z)
-		map_info->max_z = z_axis;
-	if (z_axis < map_info->min_z)
-		map_info->min_z = z_axis;
 }

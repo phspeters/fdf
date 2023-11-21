@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 19:28:11 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:42:39 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:32:29 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,9 @@ void	to_oblique(t_pixel *pixel)
 	y = pixel->y_axis;
 	pixel->x_axis = x + (pixel->z_axis * sin(angle));
 	pixel->y_axis = y - (pixel->z_axis * sin(angle));
+}
+
+void	to_parallel(t_pixel *pixel)
+{
+	pixel->x_axis = pixel->x_axis;
 }

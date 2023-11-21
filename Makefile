@@ -6,13 +6,13 @@
 #    By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 16:05:00 by pehenri2          #+#    #+#              #
-#    Updated: 2023/11/20 20:57:46 by pehenri2         ###   ########.fr        #
+#    Updated: 2023/11/21 13:02:30 by pehenri2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fdf
 BONUS_NAME	= fdf_bonus
-CFLAGS		= -Wextra -Wall -Werror -Wunreachable-code -g3
+CFLAGS		= -Wextra -Wall -Werror -Wunreachable-code -lm -g3 #-Ofast
 LIBMLX		= ./lib/MLX42
 LIBFT		= ./lib/libft
 CC			= cc
@@ -47,6 +47,8 @@ BONUS_OBJS	= $(addprefix $(BONUS_PATH), $(BONUS_SRCS:%.c=%.o))
 
 all: libmlx libft $(NAME)
 
+bonus: libmlx libft $(BONUS_NAME)
+
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
@@ -59,7 +61,7 @@ libft:
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
-bonus: libmlx libft $(BONUS_OBJS)
+$(BONUS_NAME): $(BONUS_OBJS)
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBS) $(HEADERS) -o $(BONUS_NAME)
 
 clean:
@@ -75,9 +77,9 @@ fclean: clean
 
 re: fclean all
 
-rebonus: fclean $(BONUS_NAME)
+rebonus: fclean bonus
 
 val:
-	valgrind --leak-check=full --suppressions=MLX42_suppressions ./fdf maps/42.fdf
+	valgrind --leak-check=full --suppressions=MLX42_suppressions ./fdf_bonus maps/42.fdf
 
-.PHONY: all, clean, fclean, re, val
+.PHONY: all, clean, fclean, re, rebonus, val

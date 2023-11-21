@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:32:57 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:39:33 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
 
-	if (parse_args_and_map(argc, argv, &fdf))
-		return (EXIT_FAILURE);
+	parse_args_and_map(argc, argv, &fdf);
 	fdf.parallel.pixels = read_map(argv[1], &fdf.map_info);
-	if (!fdf.parallel.pixels)
-		return (EXIT_FAILURE);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	fdf.window = mlx_init(WIDTH, HEIGHT, argv[1], true);
 	if (!fdf.window)

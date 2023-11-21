@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 21:03:51 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:31:38 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,21 @@ int	parse_args_and_map(int argc, char **argv, t_fdf *fdf)
 	int		fd;
 	char	*line;
 
-	if (parse_args(argc, argv[1]))
-		return (EXIT_FAILURE);
+	parse_args(argc, argv[1]);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (ft_printf("Error opening file"));
+		handle_error("Error opening file");
 	line = ft_get_next_line(fd);
 	fdf->map_info.width = get_width(line);
-	if (fdf->map_info.width == 0)
-		return (ft_printf("Map is empty"));
 	free(line);
+	if (fdf->map_info.width == 0)
+		handle_error("Map is empty");
 	fdf->map_info.height = get_height_and_check_width(fd, fdf->map_info.width);
 	close(fd);
 	fdf->map_info.max_z = INT_MIN;
 	fdf->map_info.min_z = INT_MAX;
-	if (fdf->map_info.height < 3 || fdf->map_info.width < 3)
-		return (ft_printf("Map must be at least 2x2"));
+	if (fdf->map_info.height < 2 || fdf->map_info.width < 2)
+		handle_error("Map must be at least 2x2");
 	return (EXIT_SUCCESS);
 }
 
@@ -41,12 +40,13 @@ int	parse_args(int argc, char *argv)
 	char	*file_extension;
 
 	if (argc == 1)
-		return (ft_printf("Map name missiong. Correct usage: './fdf map_name'"));
+		handle_error("Map name missiong. Correct usage: './fdf map_name'");
 	if (argc > 2)
-		return (ft_printf("Too many arguments. Correct usage: './fdf_bonus map_name'"));
+		handle_error("Too many arguments. Correct usage: './fdf_bonus \
+		 map_name'");
 	file_extension = (ft_strchr(argv, '\0') - 4);
 	if (ft_strncmp(".fdf", file_extension, 4) != 0)
-		return (ft_printf("Invalid extension. Map must have '.fdf' extension"));
+		handle_error("Invalid extension. Map must have '.fdf' extension");
 	return (EXIT_SUCCESS);
 }
 
@@ -93,7 +93,7 @@ unsigned int	get_height_and_check_width(int fd, unsigned int map_width)
 		{
 			free(line);
 			ft_get_next_line(-fd);
-			return (0);
+			handle_error("Invalid map. All lines must have the same width");
 		}
 		free(line);
 		line = ft_get_next_line(fd);

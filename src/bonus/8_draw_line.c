@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:49:23 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 20:56:16 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:32:19 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_line_info	set_line_info(t_pixel start, t_pixel end, t_camera cam, t_map *map)
 	return (line_info);
 }
 
-t_line_info	get_line_coordinates(t_pixel start, t_pixel end, t_camera camera, t_map map)
+t_line_info	get_line_coordinates(t_pixel start, t_pixel end, t_camera camera,
+	t_map map)
 {
 	t_line_info	line_info;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   12_utils_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:29:45 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/20 19:53:13 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:39:31 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,17 @@ void	refresh_corner_pixels(t_pixel pixel, t_map *map)
 		map->y_min = pixel.y_axis;
 }
 
+void	refresh_min_and_max_z(int z_axis, t_map_info *map_info)
+{
+	if (z_axis > map_info->max_z)
+		map_info->max_z = z_axis;
+	if (z_axis < map_info->min_z)
+		map_info->min_z = z_axis;
+}
+
 void	free_maps(t_fdf *fdf)
 {
 	ft_free_ptr_array((void **)fdf->parallel.pixels, fdf->map_info.height);
 	ft_free_ptr_array((void **)fdf->isometric.pixels, fdf->map_info.height);
+	ft_free_ptr_array((void **)fdf->oblique.pixels, fdf->map_info.height);
 }
