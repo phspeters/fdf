@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 19:35:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/22 13:21:43 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:30:04 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	print_controls_on_the_screen(t_fdf *fdf)
 	mlx_put_string(fdf->window, "Q, E -> Z rotation", 10, 70);
 	mlx_put_string(fdf->window, "SHIFT + rotation -> Speed up", 10, 90);
 	mlx_put_string(fdf->window, "Up, Down, Left, Right -> Move", 10, 110);
-	mlx_put_string(fdf->window, "R -> Randomize background color", 10, 130);
-	mlx_put_string(fdf->window, "1, 2, 3 -> Change projection", 10, 150);
-	mlx_put_string(fdf->window, "Space -> Reset position", 10, 170);
+	mlx_put_string(fdf->window, "-, = -> Zoom in or out", 10, 130);
+	mlx_put_string(fdf->window, "Mouse Scroll -> Zoom in or out", 10, 150);
+	mlx_put_string(fdf->window, "R -> Randomize background color", 10, 170);
+	mlx_put_string(fdf->window, "F -> Disable background", 10, 190);
+	mlx_put_string(fdf->window, "1, 2, 3 -> Change projection", 10, 210);
+	mlx_put_string(fdf->window, "Space -> Reset position", 10, 230);
 }

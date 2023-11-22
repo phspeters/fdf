@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/22 11:56:33 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:37:04 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	draw_loop(void *param)
 	mlx_delete_image(fdf->window, fdf->image);
 	fdf->image = mlx_new_image(fdf->window, WIDTH, HEIGHT);
 	mlx_image_to_window(fdf->window, fdf->image, 0, 0);
-	render_background(fdf);
+	if (fdf->map_info.background_color != 0x00000000)
+		render_background(fdf);
 	render_image(fdf->current_map, fdf->map_info, fdf);
 	render_controls_menu(fdf);
 	print_controls_on_the_screen(fdf);
@@ -57,7 +58,7 @@ void	action_hooks(void *param)
 
 	fdf = param;
 	mlx_loop_hook(fdf->window, close_loop_hook, fdf);
-	mlx_loop_hook(fdf->window, randomize_background_color_loop_hook, fdf);
+	mlx_loop_hook(fdf->window, background_color_loop_hook, fdf);
 	mlx_loop_hook(fdf->window, select_projection_loop_hook, fdf);
 	mlx_loop_hook(fdf->window, reset_position_loop_hook, fdf);
 	mlx_loop_hook(fdf->window, translate_loop_hook, fdf);

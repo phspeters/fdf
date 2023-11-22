@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/22 13:19:58 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:36:27 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIDTH 1600
 # define HEIGHT 900
 # define MENU_WIDTH 330
-# define MENU_HEIGHT 200
+# define MENU_HEIGHT 260
 
 typedef struct s_line_info
 {
@@ -163,7 +163,7 @@ void			zoom_scroll_hook(double xdelta, double ydelta, void *param);
 //11_hooks_utils_bonus.c
 void			select_projection_loop_hook(void *param);
 void			reset_position_loop_hook(void *param);
-void			randomize_background_color_loop_hook(void *param);
+void			background_color_loop_hook(void *param);
 void			close_loop_hook(void *param);
 
 //12_rotation_bonus.c
