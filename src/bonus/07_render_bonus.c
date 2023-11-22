@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 19:35:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/22 12:03:46 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 13:21:43 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	render_controls_menu(t_fdf *fdf)
 	int	w;
 
 	h = -1;
-	while (++h < 200)
+	while (++h < MENU_HEIGHT)
 	{
 		w = -1;
-		while (++w < 330)
+		while (++w < MENU_WIDTH)
 		{
 			put_valid_pixel(fdf->image, w, h, 0x77777777);
 		}

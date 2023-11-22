@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/22 11:56:48 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 13:19:58 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <errno.h>
 # define WIDTH 1600
 # define HEIGHT 900
+# define MENU_WIDTH 330
+# define MENU_HEIGHT 200
 
 typedef struct s_line_info
 {
