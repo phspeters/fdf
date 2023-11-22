@@ -6,12 +6,11 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:39:56 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/17 18:39:40 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:25:58 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	check_base_and_get_length(char *base)
 {
