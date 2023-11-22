@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 17:50:15 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:56:33 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	draw_loop(void *param)
 	mlx_image_to_window(fdf->window, fdf->image, 0, 0);
 	render_background(fdf);
 	render_image(fdf->current_map, fdf->map_info, fdf);
+	render_controls_menu(fdf);
+	print_controls_on_the_screen(fdf);
 }
 
 void	action_hooks(void *param)

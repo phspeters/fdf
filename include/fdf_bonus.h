@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:53:05 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 20:39:13 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:56:48 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ void			to_parallel(t_pixel *pixel);
 //07_render_bonus.c
 void			render_image(t_map *map, t_map_info map_info, t_fdf *fdf);
 void			render_background(t_fdf *fdf);
+void			render_controls_menu(t_fdf *fdf);
+void			print_controls_on_the_screen(t_fdf *fdf);
 
 //08_draw_line.c
 void			draw_line(t_pixel start, t_pixel end, t_fdf *fdf);

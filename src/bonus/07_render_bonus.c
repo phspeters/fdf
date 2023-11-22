@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 19:35:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 17:50:28 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:03:46 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,33 @@ void	render_image(t_map *map, t_map_info map_info, t_fdf *fdf)
 					fdf);
 		}
 	}
+}
+
+void	render_controls_menu(t_fdf *fdf)
+{
+	int	h;
+	int	w;
+
+	h = -1;
+	while (++h < 200)
+	{
+		w = -1;
+		while (++w < 330)
+		{
+			put_valid_pixel(fdf->image, w, h, 0x77777777);
+		}
+	}
+}
+
+void	print_controls_on_the_screen(t_fdf *fdf)
+{
+	mlx_put_string(fdf->window, "CONTROLS:", 10, 10);
+	mlx_put_string(fdf->window, "W, S -> X rotation", 10, 30);
+	mlx_put_string(fdf->window, "A, D -> Y rotation", 10, 50);
+	mlx_put_string(fdf->window, "Q, E -> Z rotation", 10, 70);
+	mlx_put_string(fdf->window, "SHIFT + rotation -> Speed up", 10, 90);
+	mlx_put_string(fdf->window, "Up, Down, Left, Right -> Move", 10, 110);
+	mlx_put_string(fdf->window, "R -> Randomize background color", 10, 130);
+	mlx_put_string(fdf->window, "1, 2, 3 -> Change projection", 10, 150);
+	mlx_put_string(fdf->window, "Space -> Reset position", 10, 170);
 }
