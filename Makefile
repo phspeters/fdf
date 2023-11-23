@@ -6,14 +6,14 @@
 #    By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 16:05:00 by pehenri2          #+#    #+#              #
-#    Updated: 2023/11/22 12:19:02 by pehenri2         ###   ########.fr        #
+#    Updated: 2023/11/23 12:33:56 by pehenri2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fdf
 BONUS_NAME	= fdf_bonus
-CFLAGS		= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-DEBUGFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -g3
+CFLAGS		= -Wextra -Wall -Werror -Wunreachable-code $(FLAG)
+FLAG 		?= -Ofast
 LIBMLX		= ./lib/MLX42
 LIBFT		= ./lib/libft
 CC			= cc
@@ -49,6 +49,7 @@ BONUS_SRCS	= 	01_main_bonus.c					\
 				13_utils_bonus.c				\
 				14_error_bonus.c
 BONUS_OBJS	= $(addprefix $(BONUS_PATH), $(BONUS_SRCS:%.c=%.o))
+EXE			?= fdf
 
 all: libmlx libft $(NAME)
 
@@ -84,17 +85,8 @@ re: fclean all
 
 rebonus: fclean bonus
 
-debug: libmlx libft $(OBJS)
-	@$(CC) $(DEBUGFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
-
-debugbonus: libmlx libft $(BONUS_OBJS)
-	@$(CC) $(DEBUGFLAGS) $(BONUS_OBJS) $(LIBS) $(HEADERS) -o $(BONUS_NAME)
-
-val: all
-	valgrind --leak-check=full --suppressions=MLX42_suppressions ./fdf maps/42.fdf
-
-valbonus: bonus
-	valgrind --leak-check=full --suppressions=MLX42_suppressions ./fdf_bonus maps/42.fdf
+val: all bonus
+	valgrind --leak-check=full --suppressions=MLX42_suppressions ./$(EXE) maps/42.fdf
 
 norm:
 	@norminette $(SRCS_PATH) $(BONUS_PATH) include $(LIBFT)

@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 17:09:51 by pehenri2         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:20:27 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_pixel	**read_map(char *filename, t_map_info *map_info)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		handle_error("Error opening file.");
+		handle_error("Error opening file");
 	map = malloc(map_info->height * sizeof(t_pixel *));
 	if (!map)
-		handle_error("Error allocating memory.");
+		handle_error("Error allocating memory");
 	h = -1;
 	while (++h < map_info->height)
 		populate_line(map, map_info, fd, h);
@@ -38,7 +38,7 @@ void	populate_line(t_pixel **map, t_map_info *map_info, int fd, int h)
 
 	map[h] = malloc(map_info->width * sizeof(t_pixel));
 	if (!map[h])
-		handle_error("Error allocating memory.");
+		handle_error("Error allocating memory");
 	splitted_line = get_coordinates_from_line(fd);
 	w = -1;
 	while (++w < map_info->width)
