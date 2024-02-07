@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_read_map.c                                      :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/23 12:20:27 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:40:24 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Reads the map from the file and populates the pixel matrix with the
+ * coordinates and color of each pixel, line by line.
+ * 
+ * @param filename The name of the file that contains the map.
+ * @param map_info The struct that contains the information about the map.
+ * @return The pixel matrix with the coordinates and color of each pixel.
+ */
 t_pixel	**read_map(char *filename, t_map_info *map_info)
 {
 	t_pixel			**map;
@@ -31,6 +39,15 @@ t_pixel	**read_map(char *filename, t_map_info *map_info)
 	return (map);
 }
 
+/**
+ * @brief Populates a line of pixels with the coordinates and color of each
+ * pixel.
+ * 
+ * @param map The pixel matrix with the coordinates and color of each pixel.
+ * @param map_info The struct that contains the information about the map.
+ * @param fd The file descriptor of the file that contains the map.
+ * @param h The current line of the map.
+ */
 void	populate_line(t_pixel **map, t_map_info *map_info, int fd, int h)
 {
 	unsigned int	w;
@@ -49,6 +66,12 @@ void	populate_line(t_pixel **map, t_map_info *map_info, int fd, int h)
 	ft_free_str_array(splitted_line);
 }
 
+/**
+ * @brief Gets the coordinates of the pixelsfrom a line of the map.
+ * 
+ * @param fd The file descriptor of the file that contains the map.
+ * @return The coordinates from a line of the map.
+ */
 char	**get_coordinates_from_line(int fd)
 {
 	char	*line;

@@ -1,17 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01_main.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 17:18:48 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:58:27 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief The main function of the program. It parses the arguments and checker
+ * if the map is valid. After that it initializes the fdf struct and other
+ * parameters, and calls the necessary functions to create the window and image
+ * with the MLX42 library. It also handles the program's main loop and install
+ * the necessary hooks to handle user input. 
+ * 
+ * @param argc The number of arguments passed to the program.
+ * @param argv The arguments passed to the program as strings.
+ * @return EXIT_SUCCESS when the program ends successfully.
+ */
 int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
@@ -37,6 +48,15 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief The function that handles the main loop of the program. It is called
+ * every time the window needs to be redrawn. It deletes the current image and
+ * creates a new one, then calls the render_image function to draw the map on
+ * the new image with the updated parameters.
+ * 
+ * @param param The fdf struct that contains all the necessary information to
+ * draw the map.
+ */
 void	draw_loop(void *param)
 {
 	t_fdf	*fdf;
@@ -48,6 +68,14 @@ void	draw_loop(void *param)
 	render_image(fdf->current_map, fdf->map_info, fdf);
 }
 
+/**
+ * @brief The function that handles the close loop hook. It is called when the
+ * user presses the ESC key. It closes the window and terminates the MLX42
+ * library.
+ * 
+ * @param param The fdf struct that contains all the necessary information to
+ * draw the map.
+ */
 void	action_hooks(void *param)
 {
 	t_fdf	*fdf;

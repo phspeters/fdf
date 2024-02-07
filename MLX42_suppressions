@@ -1,3 +1,9 @@
+/**
+ * @file MLX42_suppressions
+ *
+ * @brief suppressions file to be used with valgrind to suppres the MLX42 leaks
+ *
+ */
 {
    <MLX_CODAM>
    Memcheck:Leak

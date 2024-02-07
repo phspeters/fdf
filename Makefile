@@ -6,7 +6,7 @@
 #    By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 16:05:00 by pehenri2          #+#    #+#              #
-#    Updated: 2023/11/23 12:33:56 by pehenri2         ###   ########.fr        #
+#    Updated: 2024/02/07 17:05:27 by pehenri2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ CC			= cc
 HEADERS		= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
 SRCS_PATH	= ./src/mandatory/
-SRCS		= 	01_main.c						\
-				02_parse_args_and_map.c			\
-				03_read_map.c					\
+SRCS		= 	main.c						\
+				parse_args_and_map.c		\
+				read_map.c					\
 				04_camera.c						\
 				05_projections.c				\
 				06_transformation.c				\
