@@ -6,7 +6,7 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2024/02/07 15:00:01 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:54:24 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ unsigned int	get_width(char *line)
 
 /**
  * @brief Reads the rest of the file to get the height and check if all lines
- * have the same width as the first.
+ * have the same width as the first. If a line has a different width, the
+ * function frees the line and calls the handle_error function to exit the
+ * program with an error message.
  * 
  * @param fd The file descriptor of the map file.
  * @param map_width The width of the map.

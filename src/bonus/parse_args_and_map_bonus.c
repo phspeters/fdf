@@ -1,17 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_parse_args_and_map_bonus.c                      :+:      :+:    :+:   */
+/*   parse_args_and_map_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:23:02 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/23 12:19:38 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:27:43 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
+/**
+ * @brief Parses the arguments passed to the program and checks if the map is
+ * valid. It opens the file and reads the first line to get the width of the map.
+ * Then it reads the rest of the file to get the height and check if all lines
+ * have the same width. It also checks if the map is at least 2x2 and updates
+ * the max an min Z values of the map.
+ * 
+ * @param argc Number of arguments passed to the program.
+ * @param argv Arguments passed to the program as strings.
+ * @param fdf Struct that contains all the necessary information to draw the map.
+ * @return 0 if verification is successful, exits the program with an error
+ * message otherwise.
+ */
 int	parse_args_and_map(int argc, char **argv, t_fdf *fdf)
 {
 	int		fd;
@@ -32,9 +45,18 @@ int	parse_args_and_map(int argc, char **argv, t_fdf *fdf)
 	fdf->map_info.min_z = INT_MAX;
 	if (fdf->map_info.height < 2 || fdf->map_info.width < 2)
 		handle_error("Map must be at least 2x2");
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
+/**
+ * @brief Parses the arguments passed to the program. It checks if the number
+ * of arguments is correct and if the map has the correct extension.
+ * 
+ * @param argc Number of arguments passed to the program.
+ * @param argv Arguments passed to the program as strings.
+ * @return 0 if verification is successful, exits the program with an error
+ * message otherwise.
+ */
 int	parse_args(int argc, char *argv)
 {
 	char	*file_extension;
@@ -48,9 +70,15 @@ map_name'");
 	file_extension = (ft_strchr(argv, '\0') - 4);
 	if (ft_strncmp(".fdf", file_extension, 4) != 0)
 		handle_error("Invalid extension. Map must have '.fdf' extension");
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
+/**
+ * @brief Gets the width of the map by counting the number of words in the line.
+ * 
+ * @param line The line of the map.
+ * @return The width of the map.
+ */
 unsigned int	get_width(char *line)
 {
 	unsigned int	width;
@@ -77,6 +105,14 @@ unsigned int	get_width(char *line)
 	return (width);
 }
 
+/**
+ * @brief Reads the rest of the file to get the height of the map and check if
+ * all lines have the same width.
+ * 
+ * @param fd File descriptor of the map file.
+ * @param map_width Width of the map.
+ * @return The height of the map.
+ */
 unsigned int	get_height_and_check_width(int fd, unsigned int map_width)
 {
 	char			*line;

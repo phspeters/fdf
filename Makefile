@@ -6,50 +6,50 @@
 #    By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 16:05:00 by pehenri2          #+#    #+#              #
-#    Updated: 2024/02/07 17:05:27 by pehenri2         ###   ########.fr        #
+#    Updated: 2024/02/09 16:47:32 by pehenri2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fdf
-BONUS_NAME	= fdf_bonus
-CFLAGS		= -Wextra -Wall -Werror -Wunreachable-code $(FLAG)
-FLAG 		?= -Ofast
-LIBMLX		= ./lib/MLX42
-LIBFT		= ./lib/libft
-CC			= cc
-HEADERS		= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
-LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
-SRCS_PATH	= ./src/mandatory/
-SRCS		= 	main.c						\
+BONUS_NAME	= 	fdf_bonus
+CFLAGS		=	-Wextra -Wall -Werror -Wunreachable-code $(FLAG)
+FLAG 		?= 	-Ofast
+LIBMLX		= 	./lib/MLX42
+LIBFT		= 	./lib/libft
+CC			= 	cc
+HEADERS		= 	-I ./include -I $(LIBMLX)/include -I $(LIBFT)
+LIBS		= 	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
+SRCS_PATH	= 	./src/mandatory/
+SRCS		= 	camera.c					\
+				color.c						\
+				draw_line.c					\
+				error.c						\
+				hooks.c						\
+				main.c						\
 				parse_args_and_map.c		\
+				projections.c				\
 				read_map.c					\
-				04_camera.c						\
-				05_projections.c				\
-				06_transformation.c				\
-				07_render.c						\
-				08_draw_line.c					\
-				09_color.c						\
-				10_hooks.c						\
-				11_utils.c						\
-				12_error.c
-OBJS		= $(addprefix $(SRCS_PATH),$(SRCS:%.c=%.o))
-BONUS_PATH	= ./src/bonus/
-BONUS_SRCS	= 	01_main_bonus.c					\
-				02_parse_args_and_map_bonus.c	\
-				03_read_map_bonus.c				\
-				04_camera_bonus.c				\
-				05_projections_bonus.c			\
-				06_transformation_bonus.c		\
-				07_render_bonus.c				\
-				08_draw_line_bonus.c			\
-				09_color_bonus.c				\
-				10_hooks_bonus.c				\
-				11_hooks_utils_bonus.c			\
-				12_rotation_bonus.c				\
-				13_utils_bonus.c				\
-				14_error_bonus.c
-BONUS_OBJS	= $(addprefix $(BONUS_PATH), $(BONUS_SRCS:%.c=%.o))
-EXE			?= fdf
+				render.c					\
+				transformation.c			\
+				utils.c						
+OBJS		=	 $(addprefix $(SRCS_PATH),$(SRCS:%.c=%.o))
+BONUS_PATH	= 	./src/bonus/
+BONUS_SRCS	= 	camera_bonus.c				\
+				color_bonus.c				\
+				draw_line_bonus.c			\
+				error_bonus.c				\
+				hooks_bonus.c				\
+				hooks_utils_bonus.c			\
+				main_bonus.c				\
+				parse_args_and_map_bonus.c	\
+				projections_bonus.c			\
+				read_map_bonus.c			\
+				render_bonus.c				\
+				rotation_bonus.c			\
+				transformation_bonus.c		\
+				utils_bonus.c				
+BONUS_OBJS	= 	$(addprefix $(BONUS_PATH), $(BONUS_SRCS:%.c=%.o))
+EXE			?= 	fdf
 
 all: libmlx libft $(NAME)
 
@@ -59,7 +59,7 @@ libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 libft:
-	@make -C $(LIBFT)
+	@make -C $(LIBFT) --silent
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<\n)"
@@ -91,4 +91,4 @@ val: all bonus
 norm:
 	@norminette $(SRCS_PATH) $(BONUS_PATH) include $(LIBFT)
 
-.PHONY: all, clean, fclean, re, rebonus, norm, val, valbonus
+.PHONY: all, clean, fclean, re, rebonus, norm, val

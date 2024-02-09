@@ -6,12 +6,19 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:56:37 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 17:50:39 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:03:17 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
+/**
+ * @brief Rotates the pixel around the x, y and z axis by the corresponding
+ * angles in the camera struct. 
+ * 
+ * @param pixel Pointer to the pixel to be transformed. 
+ * @param cam Struct that contains the rotation angles.
+ */
 void	rotate_pixel(t_pixel *pixel, t_camera cam)
 {
 	rotate_around_x_axis(pixel, cam.x_angle);
@@ -19,6 +26,13 @@ void	rotate_pixel(t_pixel *pixel, t_camera cam)
 	rotate_around_z_axis(pixel, cam.z_angle);
 }
 
+/**
+ * @brief Rotates the pixel around the x axis by the angle passed as the second
+ * argument. It uses the rotation matrix to perform the rotation.
+ * 
+ * @param pixel Pointer to the pixel to be transformed.
+ * @param angle Angle in degrees to rotate the pixel around the x axis.
+ */
 void	rotate_around_x_axis(t_pixel *pixel, float angle)
 {
 	float	y;
@@ -31,6 +45,13 @@ void	rotate_around_x_axis(t_pixel *pixel, float angle)
 	pixel->z_axis = (y * sin(angle)) + (z * cos(angle));
 }
 
+/**
+ * @brief Rotates the pixel around the y axis by the angle passed as the second
+ * argument. It uses the rotation matrix to perform the rotation.
+ * 
+ * @param pixel Pointer to the pixel to be transformed.
+ * @param angle Angle in degrees to rotate the pixel around the y axis.
+ */
 void	rotate_around_y_axis(t_pixel *pixel, float angle)
 {
 	float	x;
@@ -43,6 +64,13 @@ void	rotate_around_y_axis(t_pixel *pixel, float angle)
 	pixel->z_axis = (-x * sin(angle)) + (z * cos(angle));
 }
 
+/**
+ * @brief Rotates the pixel around the z axis by the angle passed as the second
+ * argument. It uses the rotation matrix to perform the rotation.
+ * 
+ * @param pixel Pointer to the pixel to be transformed.
+ * @param angle Angle in degree	s to rotate the pixel around the z axis.
+ */
 void	rotate_around_z_axis(t_pixel *pixel, float angle)
 {
 	float	x;

@@ -6,15 +6,15 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:14:12 by pehenri2          #+#    #+#             */
-/*   Updated: 2024/02/07 15:40:24 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:39:13 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /**
- * @brief Reads the map from the file and populates the pixel matrix with the
- * coordinates and color of each pixel, line by line.
+ * @brief Opens the map file and reads from it, line by line, while populating
+ * the pixel matrix with the coordinates and color of each pixel.
  * 
  * @param filename The name of the file that contains the map.
  * @param map_info The struct that contains the information about the map.
@@ -40,8 +40,8 @@ t_pixel	**read_map(char *filename, t_map_info *map_info)
 }
 
 /**
- * @brief Populates a line of pixels with the coordinates and color of each
- * pixel.
+ * @brief Reads a line from the map and populates the corresponding pixels
+ * with their the coordinates and color.
  * 
  * @param map The pixel matrix with the coordinates and color of each pixel.
  * @param map_info The struct that contains the information about the map.
@@ -67,10 +67,11 @@ void	populate_line(t_pixel **map, t_map_info *map_info, int fd, int h)
 }
 
 /**
- * @brief Gets the coordinates of the pixelsfrom a line of the map.
+ * @brief Reads a line from the map and splits it into words.
+ * That is strings separated by spaces.
  * 
  * @param fd The file descriptor of the file that contains the map.
- * @return The coordinates from a line of the map.
+ * @return The coordinates from a line of the map as an array of strings.
  */
 char	**get_coordinates_from_line(int fd)
 {
@@ -83,6 +84,16 @@ char	**get_coordinates_from_line(int fd)
 	return (coordinates);
 }
 
+/**
+ * @brief Populates the pixel matrix with the coordinates and color of each
+ * pixel.
+ * 
+ * @param pixel The pixel that will be populated.
+ * @param str The string that contains the coordinates and color of the pixel
+ * separated by a comma.
+ * @param h The current line of the map.
+ * @param w The current column of the map.
+ */
 void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 {
 	pixel->x_axis = w;
@@ -91,6 +102,19 @@ void	populate_pixel_matrix(t_pixel *pixel, char *str, int h, int w)
 	pixel->rgba_channel = get_color(str);
 }
 
+/**
+ * @brief Gets the color of a pixel from the string that contains it's 
+ * z axis value and it's color. e.g. 21,0xffff, where 21 is the z-axis value
+ * and 0xffff is the color (R: ff, G: ff, B: 00, A: 00). First it finds the
+ * comma in the string, then it converts the hexadecimal color to an unsigned
+ * integer. The maps provided do not have alpha channel, if that's the case,
+ * the function sets it to 0xff because the channel is required by the MLX42
+ * library.
+ * 
+ * @param coordinate The string that contains the coordinates and color of the
+ * pixel.
+ * @return The color of the pixel.
+ */
 uint32_t	get_color(char *coordinate)
 {
 	char		*comma_address;
@@ -101,8 +125,11 @@ uint32_t	get_color(char *coordinate)
 	if (comma_address)
 	{
 		hexadecimal = ft_strtolower(comma_address + 3);
-		color = (ft_atoi_base(hexadecimal, "0123456789abcdef") << 8) | 0xff;
-		return (color);
+		color = (ft_atoi_base(hexadecimal, "0123456789abcdef"));
+		if (color & 0xff000000)
+			return (color);
+		else
+			return ((color << 8) | 0xff);
 	}
 	return (0xffffffff);
 }

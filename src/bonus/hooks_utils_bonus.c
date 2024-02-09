@@ -1,17 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   11_hooks_utils_bonus.c                             :+:      :+:    :+:   */
+/*   hooks_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/22 14:36:12 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:37:01 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
+/**
+ * @brief Sets the hook to change the current map when the number keys are
+ * pressed.
+ * 
+ * @param param Pointer to the main struct of the program.
+ */
 void	select_projection_loop_hook(void *param)
 {
 	t_fdf	*fdf;
@@ -25,6 +31,12 @@ void	select_projection_loop_hook(void *param)
 		fdf->current_map = &fdf->parallel;
 }
 
+/**
+ * @brief Sets the hook to reset the image position when the space key is
+ * pressed.
+ * 
+ * @param param Pointer to the main struct of the program.
+ */
 void	reset_position_loop_hook(void *param)
 {
 	t_fdf	*fdf;
@@ -42,6 +54,12 @@ void	reset_position_loop_hook(void *param)
 	}
 }
 
+/**
+ * @brief Sets the hook to randomly change the background color when the R key
+ * is pressed.
+ * 
+ * @param param Pointer to the main struct of the program.
+ */
 void	background_color_loop_hook(void *param)
 {
 	t_fdf	*fdf;
@@ -53,6 +71,11 @@ void	background_color_loop_hook(void *param)
 		fdf->map_info.background_color = 0x00000000;
 }
 
+/**
+ * @brief Sets the hook to close the window when the escape key is pressed.
+ * 
+ * @param fdf Pointer to the main struct of the program.
+ */
 void	close_loop_hook(void *param)
 {
 	t_fdf	*fdf;

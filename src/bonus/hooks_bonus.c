@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   10_hooks_bonus.c                                   :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 19:41:55 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 17:50:35 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:35:04 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
+/**
+ * @brief Sets the hook to translate the map when the arrow keys are pressed.
+ * 
+ * @param param Pointer to the main struct of the program.
+ */
 void	translate_loop_hook(void *param)
 {
 	t_fdf	*fdf;
@@ -27,6 +32,13 @@ void	translate_loop_hook(void *param)
 		fdf->camera.x_offset += 10;
 }
 
+/**
+ * @brief Sets the hook to rotate the map base on keyboard input.
+ * Because it is a generic hook, it doesn't support holding the key down.
+ * 
+ * @param keydata Struct with the key data.
+ * @param param Pointer to the main struct of the program.
+ */
 void	rotate_loop_hook(void *param)
 {
 	t_fdf	*fdf;
@@ -46,6 +58,15 @@ void	rotate_loop_hook(void *param)
 		fdf->camera.z_angle += 1;
 }
 
+/**
+ * @brief Sets the key hook to rotate the map base on keyboard input.
+ * Because it is a specific hook, it supports holding the key to give continuous
+ * input. It's responsible for rotating the map faster when pressing the shift
+ * key in conjunction with the rotation key.
+ * 
+ * @param keydata Struct with the key data.
+ * @param param Pointer to the main struct of the program.
+ */
 void	rotate_key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_fdf	*fdf;
@@ -71,6 +92,11 @@ void	rotate_key_hook(mlx_key_data_t keydata, void *param)
 		fdf->camera.z_angle += 2;
 }
 
+/**
+ * @brief Sets the hook to zoom the map base on keyboard input.
+ * 
+ * @param param Pointer to the main struct of the program.
+ */
 void	zoom_loop_hook(void *param)
 {
 	t_fdf	*fdf;
@@ -82,6 +108,13 @@ void	zoom_loop_hook(void *param)
 		fdf->camera.zoom *= 0.95;
 }
 
+/**
+ * @brief Sets the hook to zoom the map base on mouse input.
+ * 
+ * @param xdelta The amount of horizontal scroll.
+ * @param ydelta The amount of vertical scroll.
+ * @param param Pointer to the main struct of the program.
+ */
 void	zoom_scroll_hook(double xdelta, double ydelta, void *param)
 {
 	t_fdf	*fdf;

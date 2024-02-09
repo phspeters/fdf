@@ -6,14 +6,14 @@
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:08:03 by pehenri2          #+#    #+#             */
-/*   Updated: 2024/02/07 14:58:27 by pehenri2         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:50:59 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /**
- * @brief The main function of the program. It parses the arguments and checker
+ * @brief The main function of the program. It parses the arguments and checks
  * if the map is valid. After that it initializes the fdf struct and other
  * parameters, and calls the necessary functions to create the window and image
  * with the MLX42 library. It also handles the program's main loop and install
@@ -69,9 +69,8 @@ void	draw_loop(void *param)
 }
 
 /**
- * @brief The function that handles the close loop hook. It is called when the
- * user presses the ESC key. It closes the window and terminates the MLX42
- * library.
+ * @brief The function that installs the close_loop_hook, which is responsible
+ * for closing the window when the users presses the ESC key
  * 
  * @param param The fdf struct that contains all the necessary information to
  * draw the map.

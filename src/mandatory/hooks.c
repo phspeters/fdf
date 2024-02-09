@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   07_render.c                                        :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pehenri2 <pehenri2@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 19:35:52 by pehenri2          #+#    #+#             */
-/*   Updated: 2023/11/21 17:14:01 by pehenri2         ###   ########.fr       */
+/*   Created: 2023/11/20 19:41:55 by pehenri2          #+#    #+#             */
+/*   Updated: 2024/02/07 21:35:12 by pehenri2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	render_image(t_map *map, t_map_info map_info, t_fdf *fdf)
+/**
+ * @brief Sets the hook to close the window when the escape key is pressed.
+ * 
+ * @param fdf Pointer to the main struct of the program.
+ */
+void	close_loop_hook(void *param)
 {
-	unsigned int	h;
-	unsigned int	w;
+	t_fdf	*fdf;
 
-	h = -1;
-	while (++h < map_info.height)
-	{
-		w = -1;
-		while (++w < map_info.width)
-		{
-			if (w < map_info.width - 1)
-				draw_line(map->pixels[h][w], map->pixels[h][w + 1],
-					fdf);
-			if (h < map_info.height - 1)
-				draw_line(map->pixels[h][w], map->pixels[h + 1][w],
-					fdf);
-		}
-	}
+	fdf = param;
+	if (mlx_is_key_down(fdf->window, MLX_KEY_ESCAPE))
+		mlx_close_window(fdf->window);
 }
